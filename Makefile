@@ -7,8 +7,8 @@ OBJ_DIR = obj
 LIBFT_DIR = libft
 LIBFT = $(LIBFT_DIR)/libft.a
 LIBFT_HEAD = $(LIBFT_DIR)/include
-HEAD_FILES = asm.h
-SRC_FILES = main.c
+HEAD_FILES = asm.h op.h
+SRC_FILES = main.c error.c
 SRC = $(addprefix $(SRC_DIR)/, $(SRC_FILES))
 OBJ = $(patsubst $(SRC_DIR)/%.c, $(OBJ_DIR)/%.o, $(SRC))
 
