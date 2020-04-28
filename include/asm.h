@@ -13,4 +13,7 @@ typedef struct		s_asm {
 	int				fd;
 }					t_asm;
 
+void				error(char *s);
+void				check_invariants(void);
+
 #endif
