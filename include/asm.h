@@ -1,5 +1,6 @@
 #ifndef ASM_H
 # define ASM_H
+# include "op.h"
 
 # define BUFF_SIZE 32767
 
