@@ -9,6 +9,9 @@ static void	input_disasm(t_asm *a, int ac, char **av)
 	(void)a;
 	(void)ac;
 	(void)av;
+
+	ft_printf("nothing here yet!\n");
+	exit(EXIT_SUCCESS);
 }
 
 static void	input_asm(t_asm *a, int ac, char **av)
@@ -25,19 +28,24 @@ void		input(t_asm *a, int ac, char **av)
 
 	r = 0;
 	fd = 0;
-	if (((ac == 2 && (fd = open(av[1], O_RDONLY)) > 0) || (ac == 3 &&
-	ft_strequ(av[1], "-d") && (fd = open(av[2], O_RDONLY)) > 0)) &&
-	(r = read(fd, a->buff, BUFF_SIZE) > 0) &&
-	(r = read(fd, a->buff, 1)) == 0)
-		ac == 3 ? input_disasm(a, ac, av) : input_asm(a, ac, av);
+	if (((ac == 2 && (fd = open(av[1], O_RDONLY)) >= 0) || (ac == 3 &&
+	ft_strequ(av[1], "-d") && (fd = open(av[2], O_RDONLY)) >= 0)))
+	{
+		if ((r = read(fd, a->buff, BUFF_SIZE)) > 0 &&
+		(r = read(fd, a->buff, 1)) == 0)
+			ac == 3 ? input_disasm(a, ac, av) : input_asm(a, ac, av);
+		else if (r == 0)
+			error2(ac == 3 ? av[2] : av[1], " is empty.");
+		else if (r > 0)
+			error2(ac == 3 ? av[2] : av[1], " is too large.");
+		else
+			sys_error(ac == 3 ? av[2] : av[1]);
+		close(fd);
+	}
 	else if (ac < 2 || ac > 3 || (ac == 3 && !ft_strequ(av[1], "-d")))
 		usage();
-	else if (fd < 0 || r < 0)
+	else if (fd < 0)
 		sys_error(ac == 3 ? av[2] : av[1]);
-	else if (r == 0)
-		error2(ac == 3 ? av[2] : av[1], " size is zero.");
-	else if (r > 0)
-		error2(ac == 3 ? av[2] : av[1], " is too large.");
 	else
 		error("unknown.");
 }
