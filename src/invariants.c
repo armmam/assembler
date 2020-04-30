@@ -2,20 +2,12 @@
 #include "asm.h"
 #include "libft.h"
 
-/*
-** COMMENT_CHAR, LABEL_CHAR, DIRECT_CHAR, SEPARATOR_CHAR, first element of
-** NAME_CMD_STRING and COMMENT_CMD_STRING and any elements of LABEL_CHARS
-** should all be different, printable non-space and not '"'. In addition, none
-** of the above (except for chars from LABEL_CHARS) can be alphabetical or
-** numeric and NAME_CMD_STRING and COMMENT_CMD_STRING should be different.
-*/
-
 static void	check_labels(void)
 {
 	char	c;
 
-	if (ft_strchr(LABEL_CHARS, '"') ||
-	ft_strchr(LABEL_CHARS, COMMENT_CHAR) ||
+	if (!ft_strlen(LABEL_CHARS) ||  ft_strchr(LABEL_CHARS, '"') ||
+	ft_strchr(LABEL_CHARS, '-') || ft_strchr(LABEL_CHARS, COMMENT_CHAR) ||
 	ft_strchr(LABEL_CHARS, LABEL_CHAR) ||
 	ft_strchr(LABEL_CHARS, DIRECT_CHAR) ||
 	ft_strchr(LABEL_CHARS, SEPARATOR_CHAR) ||
@@ -37,7 +29,8 @@ static void	check_char(void)
 	if (ft_isalnum(COMMENT_CHAR) || ft_isalnum(LABEL_CHAR) ||
 	ft_isalnum(DIRECT_CHAR) || ft_isalnum(SEPARATOR_CHAR) ||
 	COMMENT_CHAR == '"' || LABEL_CHAR == '"' || DIRECT_CHAR == '"' ||
-	SEPARATOR_CHAR == '"' || !ft_isprint(COMMENT_CHAR) ||
+	SEPARATOR_CHAR == '"' || COMMENT_CHAR == '-' || LABEL_CHAR == '-' ||
+	DIRECT_CHAR == '-' || SEPARATOR_CHAR == '-' || !ft_isprint(COMMENT_CHAR) ||
 	ft_isspace(COMMENT_CHAR) || !ft_isprint(LABEL_CHAR) ||
 	ft_isspace(LABEL_CHAR) || !ft_isprint(DIRECT_CHAR) ||
 	ft_isspace(DIRECT_CHAR) || !ft_isprint(SEPARATOR_CHAR) ||
@@ -50,13 +43,27 @@ static void	check_char(void)
 		error("op.h constants are invalid.");
 }
 
+/*
+** LABELS_CHARS, NAME_CMD_STRING and COMMENT_CMD_STRING should be non-empty.
+** NAME_CMD_STRING and COMMENT_CMD_STRING should be different and one cannot be
+** a substring of the other. COMMENT_CHAR, LABEL_CHAR, DIRECT_CHAR,
+** SEPARATOR_CHAR, first element of NAME_CMD_STRING and COMMENT_CMD_STRING and
+** any elements of LABEL_CHARS should all be different, printable non-space,
+** not '"' and not '-'. In addition, none of the above (except for chars from
+** NAME_CMD_STRING, COMMENT_CMD_STRING (starting with the second one) and
+** LABEL_CHARS) can be alphabetical or numeric.
+*/
+
 void		check_invariants(void)
 {
 	if (BUFF_SIZE != SHRT_MAX && BUFF_SIZE != USHRT_MAX)
 		error("asm.h constants are invalid.");
 	if (NAME_CMD_STRING[0] != COMMENT_CMD_STRING[0] ||
-	ft_strcmp(NAME_CMD_STRING, COMMENT_CMD_STRING) == 0 ||
+	ft_strequ(NAME_CMD_STRING, COMMENT_CMD_STRING) ||
+	ft_strstr(NAME_CMD_STRING, COMMENT_CMD_STRING) ||
+	ft_strstr(COMMENT_CMD_STRING, NAME_CMD_STRING) ||
 	ft_strchr(NAME_CMD_STRING, '"') || ft_strchr(COMMENT_CMD_STRING, '"') ||
+	ft_strchr(NAME_CMD_STRING, '-') || ft_strchr(COMMENT_CMD_STRING, '-') ||
 	ft_isalnum(NAME_CMD_STRING[0]) || !ft_isprint(NAME_CMD_STRING[0]) ||
 	ft_isspace(NAME_CMD_STRING[0]) ||
 	IND_SIZE != sizeof(short) || REG_SIZE != sizeof(int) ||

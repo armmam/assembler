@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 
 /*
-** All error and usage messages and invariant check.
+** System error and usage messages.
 */
 
 #include <stdio.h>
@@ -24,23 +24,6 @@ void	sys_error(char *s)
 	if (!s)
 		write(STDERR_FILENO, "Error: ", 7);
 	perror(s);
-	exit(EXIT_FAILURE);
-}
-
-void	error(char *s)
-{
-	write(STDERR_FILENO, "Error: ", 7);
-	write(STDERR_FILENO, s, ft_strlen(s));
-	write(STDERR_FILENO, "\n", 1);
-	exit(EXIT_FAILURE);
-}
-
-void	error2(char *s, char *t)
-{
-	write(STDERR_FILENO, "Error: ", 7);
-	write(STDERR_FILENO, s, ft_strlen(s));
-	write(STDERR_FILENO, t, ft_strlen(t));
-	write(STDERR_FILENO, "\n", 1);
 	exit(EXIT_FAILURE);
 }
 
