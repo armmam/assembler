@@ -23,6 +23,8 @@
 typedef unsigned char	t_byte;
 
 /*
+** i - index of the first char in current token
+** j - index of the last char in current token
 ** nl -- number of the last \n in buff encountered
 ** nl_i -- index of the last \n in buff encountered
 */
@@ -52,7 +54,6 @@ unsigned			text(t_asm *a);
 unsigned			neg_indirect(t_asm *a);
 unsigned			direct(t_asm *a);
 unsigned			indirect_label(t_asm *a);
-unsigned			separator(t_asm *a);
-unsigned			endline(t_asm *a);
+void				new_newline(t_asm *a);
 
 #endif

@@ -6,7 +6,7 @@ static void	check_labels(void)
 {
 	char	c;
 
-	if (!ft_strlen(LABEL_CHARS) ||  ft_strchr(LABEL_CHARS, '"') ||
+	if (!ft_strlen(LABEL_CHARS) || ft_strchr(LABEL_CHARS, '"') ||
 	ft_strchr(LABEL_CHARS, '-') || ft_strchr(LABEL_CHARS, COMMENT_CHAR) ||
 	ft_strchr(LABEL_CHARS, LABEL_CHAR) ||
 	ft_strchr(LABEL_CHARS, DIRECT_CHAR) ||

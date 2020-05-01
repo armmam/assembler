@@ -19,7 +19,7 @@
 #include "asm.h"
 #include "libft.h"
 
-void	error(char *s)
+void		error(char *s)
 {
 	write(STDERR_FILENO, "Error: ", 7);
 	write(STDERR_FILENO, s, ft_strlen(s));
@@ -27,7 +27,7 @@ void	error(char *s)
 	exit(EXIT_FAILURE);
 }
 
-void	error2(char *s, char *t)
+void		error2(char *s, char *t)
 {
 	write(STDERR_FILENO, "Error: ", 7);
 	write(STDERR_FILENO, s, ft_strlen(s));
@@ -55,7 +55,7 @@ static void	next_newline(t_asm *a)
 ** message.
 */
 
-void	error3(char *s, t_asm *a)
+void		error3(char *s, t_asm *a)
 {
 	next_newline(a);
 	write(STDERR_FILENO, "Error: ", 7);

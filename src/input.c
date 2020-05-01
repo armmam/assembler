@@ -8,16 +8,13 @@ static void	input_disasm(t_asm *a, int ac, char **av)
 	(void)a;
 	(void)ac;
 	(void)av;
-
 	ft_printf("nothing here yet!\n");
 	exit(EXIT_SUCCESS);
 }
 
-static void	input_asm(t_asm *a, int ac, char **av)
+static void	input_asm(t_asm *a)
 {
 	(void)a;
-	(void)ac;
-	(void)av;
 }
 
 /*
@@ -41,7 +38,7 @@ void		input(t_asm *a, int ac, char **av)
 	{
 		if ((r = read(fd, a->buff, BUFF_SIZE)) > 0 &&
 		(r = read(fd, a->buff, 1)) == 0)
-			ac == 3 ? input_disasm(a, ac, av) : input_asm(a, ac, av);
+			ac == 3 ? input_disasm(a, ac, av) : input_asm(a);
 		else if (r == 0)
 			error2(ac == 3 ? av[2] : av[1], " is empty.");
 		else if (r > 0)
