@@ -35,7 +35,7 @@ unsigned	string(t_asm *a)
 {
 	while (a->buff[a->j] != '\"' && a->buff[a->j++] != '\0')
 		if (a->buff[a->j] == '\n')
-			new_newline(a);
+			endl(a);
 	if (a->buff[a->j] == '\"')
 		return (STRING);
 	else
@@ -102,7 +102,3 @@ unsigned		text(t_asm *a)
 	else
 		return (instruction(a));
 }
-
-
-
-

@@ -14,7 +14,8 @@ static void	input_disasm(t_asm *a, int ac, char **av)
 
 static void	input_asm(t_asm *a)
 {
-	(void)a;
+	input_head(a);
+	input_body(a);
 }
 
 /*

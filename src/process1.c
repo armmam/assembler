@@ -37,6 +37,12 @@ static void	input_comment(t_asm *a)
 		error3("Trying to specify comment multiple times", a);
 }
 
+/*
+** Check that the file starts with exactly one COMMAND_NAME and COMMAND_COMMENT
+** tokens, each followed with one STRING token, one pair per line (STRING may
+** be multiline).
+*/
+
 void		input_head(t_asm *a)
 {
 	unsigned	head_token;
@@ -50,8 +56,19 @@ void		input_head(t_asm *a)
 			input_comment(a);
 		else
 			error3("Expected program name/comment", a);
+		if (tokenize(a) != ENDLINE)
+			error3("Expected newline", a);
 	}
 }
+
+/*
+** Check that every LABEL is at the beginning of a line, there is at most one
+** INSTRUCTION per line (each of which is also whether at the beginning of a
+** line or right after LABEL), each one is followed with a valid number and
+** types of arguments, all separated from each other with SEPARATOR_CHAR.
+** Record each LABEL name and the number of a byte it points to in a hash
+** table.
+*/
 
 void		input_body(t_asm *a)
 {

@@ -5,10 +5,11 @@
 ** Set nl_i and nl to refer to the new \n encountered
 */
 
-void		new_newline(t_asm *a)
+unsigned		endl(t_asm *a)
 {
 	a->nl_i = a->j;
 	++a->nl;
+	return (ENDLINE);
 }
 
 static void		skip(t_asm *a)
@@ -20,15 +21,11 @@ static void		skip(t_asm *a)
 		if (a->buff[a->j] == '\0')
 			error("No newline at end of file.");
 		++a->j;
-		new_newline(a);
+		endl(a);
 	}
 	else
-		while (ft_isspace(a->buff[a->j]) || a->buff[a->j] == '\n')
-		{
-			if (a->buff[a->j] == '\n')
-				new_newline(a);
+		while (ft_isspace(a->buff[a->j]))
 			++a->j;
-		}
 	a->i = a->j;
 }
 
@@ -59,9 +56,12 @@ unsigned		tokenize(t_asm *a)
 	else if (a->buff[a->i] == LABEL_CHAR)
 		return (indirect_label(a)); // INDIRECT_LABEL
 	else if (a->buff[a->i] == SEPARATOR_CHAR || a->buff[a->i] == '\n') // SEPARATOR / ENDLINE
-		return (a->buff[a->i++] == SEPARATOR_CHAR ? SEPARATOR_CHAR : ENDLINE);
+	{
+		++a->j;
+		return (a->buff[a->i++] == SEPARATOR_CHAR ? SEPARATOR_CHAR : endl(a));
+	}
 	else if (a->buff[a->i] == '\0')
 		return (END); // END
-	error("Unknown token.");
+	error("Unknown token."); // outside of else block
 	return (0);
 }

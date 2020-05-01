@@ -64,7 +64,3 @@ unsigned	indirect_label(t_asm *a)
 		return (0);
 	}
 }
-
-
-
-

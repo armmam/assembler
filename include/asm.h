@@ -46,6 +46,8 @@ void					usage(void);
 void					check_invariants(void);
 
 void					input(t_asm *a, int ac, char **av);
+void					input_head(t_asm *a);
+void					input_body(t_asm *a);
 
 unsigned				tokenize(t_asm *a);
 unsigned				name(t_asm *a);
@@ -54,6 +56,6 @@ unsigned				text(t_asm *a);
 unsigned				neg_indirect(t_asm *a);
 unsigned				direct(t_asm *a);
 unsigned				indirect_label(t_asm *a);
-void					new_newline(t_asm *a);
+unsigned				endl(t_asm *a);
 
 #endif
