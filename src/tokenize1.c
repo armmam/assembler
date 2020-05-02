@@ -12,20 +12,10 @@ unsigned		endl(t_asm *a)
 	return (ENDLINE);
 }
 
-static void		skip(t_asm *a)
+static void		skip_spaces(t_asm *a)
 {
-	if (a->buff[a->j] == COMMENT_CHAR)
-	{
-		while (a->buff[a->j] != '\n' && a->buff[a->j] != '\0')
-			++a->j;
-		if (a->buff[a->j] == '\0')
-			error("No newline at end of file.");
+	while (ft_isspace(a->buff[a->j]))
 		++a->j;
-		endl(a);
-	}
-	else
-		while (ft_isspace(a->buff[a->j]))
-			++a->j;
 	a->i = a->j;
 }
 
@@ -41,7 +31,7 @@ static void		skip(t_asm *a)
 
 unsigned		tokenize(t_asm *a)
 {
-	skip(a);
+	skip_spaces(a);
 	if (a->buff[a->i] == NAME_CMD_STRING[0])
 		return (name(a)); // COMMAND_NAME or COMMAND_COMMENT
 	else if (a->buff[a->i] == '"')
@@ -55,13 +45,14 @@ unsigned		tokenize(t_asm *a)
 		return (direct(a)); // DIRECT / DIRECT_LABEL
 	else if (a->buff[a->i] == LABEL_CHAR)
 		return (indirect_label(a)); // INDIRECT_LABEL
-	else if (a->buff[a->i] == SEPARATOR_CHAR || a->buff[a->i] == '\n') // SEPARATOR / ENDLINE
-	{
-		++a->j;
-		return (a->buff[a->i++] == SEPARATOR_CHAR ? SEPARATOR_CHAR : endl(a));
-	}
+	else if (a->buff[a->i] == SEPARATOR_CHAR ||
+	a->buff[a->i] == COMMENT_CHAR || a->buff[a->i] == '\n') // SEPARATOR / comment / ENDLINE
+		return( char_token(a));
 	else if (a->buff[a->i] == '\0')
 		return (END); // END
-	error("Unknown token."); // outside of else block
-	return (0);
+	else
+	{
+		error("Unknown token.");
+		return (0);
+	}
 }

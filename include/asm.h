@@ -57,5 +57,6 @@ unsigned				neg_indirect(t_asm *a);
 unsigned				direct(t_asm *a);
 unsigned				indirect_label(t_asm *a);
 unsigned				endl(t_asm *a);
+unsigned				char_token(t_asm *a);
 
 #endif

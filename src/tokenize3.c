@@ -64,3 +64,21 @@ unsigned	indirect_label(t_asm *a)
 		return (0);
 	}
 }
+
+/*
+** Try to process SEPARATOR, ENDLINE or comment. Exit with error if failed.
+*/
+
+unsigned	char_token(t_asm *a)
+{
+	if (a->buff[a->i] == COMMENT_CHAR)
+	{
+		while (a->buff[a->j] != '\n' && a->buff[a->j] != '\0')
+			++a->j;
+		if (a->buff[a->j] == '\0')
+			error("No newline at end of file.");
+		return (endl(a));
+	}
+	a->i = ++a->j;
+	return (a->buff[a->i++] == SEPARATOR_CHAR ? SEPARATOR : endl(a));
+}
