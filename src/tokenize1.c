@@ -14,7 +14,7 @@ unsigned		endl(t_asm *a)
 
 static void		skip_spaces(t_asm *a)
 {
-	while (ft_isspace(a->buff[a->j]))
+	while (a->buff[a->j] == ' ' || a->buff[a->j] == '\t')
 		++a->j;
 	a->i = a->j;
 }
