@@ -20,22 +20,42 @@
 # define ENDLINE			2048
 # define END				4096
 
+# define HASH_SIZE			67
+
 typedef unsigned char		t_byte;
+
+/*
+** Struct to store label info (an element in a hash table)
+** i -- index of the first char in a label
+** len -- number of chars in a label
+** number of the byte of a label in the output file
+*/
+
+typedef struct			s_label {
+	unsigned			i;
+	unsigned			len;
+	unsigned			byte_i;
+	struct s_label		*next;
+}						t_label;
 
 /*
 ** i - index of the first char in current token
 ** j - index of the last char in current token
 ** nl -- number of the last \n in buff encountered
 ** nl_i -- index of the last \n in buff encountered
+** byte_i -- number of the byte of the token pointed to by i in the output file
 */
 
 typedef struct			s_asm {
+	char				buff[BUFF_SIZE];
 	unsigned			i;
 	unsigned			j;
 	unsigned			nl;
 	unsigned			nl_i;
+	unsigned			byte_i;
 	t_header			header;
-	char				buff[BUFF_SIZE];
+	t_label				*ht[HASH_SIZE];
+
 }						t_asm;
 
 void					sys_error(char *s);
@@ -58,5 +78,8 @@ unsigned				direct(t_asm *a);
 unsigned				indirect_label(t_asm *a);
 unsigned				endl(t_asm *a);
 unsigned				char_token(t_asm *a);
+
+t_label					*ht_search(t_asm *a);
+void					ht_insert(t_asm *a);
 
 #endif

@@ -47,7 +47,7 @@ unsigned		tokenize(t_asm *a)
 		return (indirect_label(a)); // INDIRECT_LABEL
 	else if (a->buff[a->i] == SEPARATOR_CHAR ||
 	a->buff[a->i] == COMMENT_CHAR || a->buff[a->i] == '\n') // SEPARATOR / comment / ENDLINE
-		return( char_token(a));
+		return (char_token(a));
 	else if (a->buff[a->i] == '\0')
 		return (END); // END
 	else

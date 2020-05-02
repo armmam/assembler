@@ -53,6 +53,9 @@ static void	next_newline(t_asm *a)
 /*
 ** Include line number where the error occured with its contents into error
 ** message.
+**
+** Fix: print a single line instead of the rest of the file (replace the next
+** \n with \0)
 */
 
 void		error3(char *s, t_asm *a)

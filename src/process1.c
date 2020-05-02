@@ -47,16 +47,16 @@ static void	input_comment(t_asm *a)
 
 void		input_head(t_asm *a)
 {
-	unsigned	head_token;
+	unsigned	token;
 
 	while (!a->header.prog_name[0] || !a->header.comment[0])
 	{
-		while ((head_token = tokenize(a)) == ENDLINE)
+		while ((token = tokenize(a)) == ENDLINE)
 		{
 		}
-		if (head_token == COMMAND_NAME)
+		if (token == COMMAND_NAME)
 			input_name(a);
-		else if (head_token == COMMAND_COMMENT)
+		else if (token == COMMAND_COMMENT)
 			input_comment(a);
 		else
 			error3("Expected program name/comment", a);
@@ -99,5 +99,21 @@ that the next token is ENDLINE, if END then EXIT_FAILURE).
 
 void		input_body(t_asm *a)
 {
-	input_instruction(a);
+	unsigned	token;
+
+	while ((token = tokenize(a)) != END)
+	{
+		if (token == LABEL)
+		{
+			token = tokenize(a);
+			ht_insert(a);
+		}
+		if (token == INSTRUCTION)
+		{
+			input_instruction(a);
+			token = tokenize(a);
+		}
+		if (token != ENDLINE)
+			error3("Expected newline", a);
+	}
 }

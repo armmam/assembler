@@ -6,7 +6,7 @@
 ** failed.
 */
 
-unsigned	name(t_asm *a)
+unsigned		name(t_asm *a)
 {
 	if (ft_strnequ(&a->buff[a->i], NAME_CMD_STRING,
 	ft_strlen(NAME_CMD_STRING)))
@@ -31,7 +31,7 @@ unsigned	name(t_asm *a)
 ** Try to process the token as STRING. Exit with error if failed.
 */
 
-unsigned	string(t_asm *a)
+unsigned		string(t_asm *a)
 {
 	while (a->buff[a->j] != '\"' && a->buff[a->j++] != '\0')
 		if (a->buff[a->j] == '\n')
