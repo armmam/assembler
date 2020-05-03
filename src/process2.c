@@ -1,7 +1,7 @@
 #include "asm.h"
 #include "libft.h"
 
-static int	arg_size(t_op *op, unsigned token)
+static int	arg_size(const t_op *op, unsigned token)
 {
 	if (token == REGISTER)
 		return (REG_SIZE);

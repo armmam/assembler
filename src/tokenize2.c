@@ -94,9 +94,9 @@ unsigned		text(t_asm *a)
 		++a->j;
 	if (a->buff[a->j] == LABEL_CHAR)
 		return (LABEL);
-	else if (a->buff[a->i] == 'r' && ((a->j - a->i == ft_strlen("r1") &&
+	else if (a->buff[a->i] == 'r' && ((a->j - a->i == (int)ft_strlen("r1") &&
 	!ft_strnequ(&a->buff[a->i], "r0", ft_strlen("r0")) &&
-	ft_isdigit(a->buff[a->j - 1])) || (a->j - a->i == ft_strlen("r01") &&
+	ft_isdigit(a->buff[a->j - 1])) || (a->j - a->i == (int)ft_strlen("r01") &&
 	ft_isdigit(a->buff[a->j - 1]) && ft_isdigit(a->buff[a->j - 2]) &&
 	!ft_strnequ(&a->buff[a->i], "r00", ft_strlen("r00")))))
 		return (REGISTER);
