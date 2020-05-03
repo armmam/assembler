@@ -45,7 +45,7 @@ unsigned		string(t_asm *a)
 	}
 }
 
-static int		ft_strnnum(const char *s, size_t num)
+static int		ft_strnnum(const char *s, int num)
 {
 	if (!s)
 		return (0);
@@ -66,10 +66,13 @@ static unsigned	instruction(t_asm *a)
 	"aff"};
 	int					i;
 
-	i = -1;
-	while (++i < OP_NUM)
+	i = 0;
+	while (i < OP_NUM)
+	{
 		if (ft_strnequ(&a->buff[a->i], tab[i], ft_strlen(tab[i])))
 			return (INSTRUCTION);
+			++i;
+	}
 	error3("Invalid instruction", a);
 	return (0);
 }

@@ -40,13 +40,11 @@ t_label			*ht_search(t_asm *a)
 void			ht_insert(t_asm *a)
 {
 	static t_label	label;
-	unsigned		hash_val;
 
 	if (ht_search(a) == NULL)
 	{
 		label = (t_label){.i = a->i, .len = a->j - a->i, .byte_i = a->byte_i};
-		hash_val = hash(&a->buff[label.i], label.len);
-		label.next = a->ht[hash_val];
+		label.next = a->ht[hash(&a->buff[label.i], label.len)];
 		a->ht[hash(&a->buff[label.i], label.len)] = &label;
 	}
 }

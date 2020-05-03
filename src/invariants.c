@@ -51,7 +51,9 @@ static void	check_char(void)
 ** any elements of LABEL_CHARS should all be different, printable non-space,
 ** not '"' and not '-'. In addition, none of the above (except for chars from
 ** NAME_CMD_STRING, COMMENT_CMD_STRING (starting with the second one) and
-** LABEL_CHARS) can be alphabetical or numeric.
+** LABEL_CHARS) can be alphabetical or numeric. Also, T_REG should be equal to
+** REGISTER, T_DIR should be equal to DIRECT, T_IND should be equal to
+** INDIRECT.
 */
 
 void		check_invariants(void)
@@ -72,6 +74,7 @@ void		check_invariants(void)
 	MAX_ARGS_NUMBER > 4 || MAX_PLAYERS <= 0 || MEM_SIZE <= 0 ||
 	CHAMP_MAX_SIZE * MAX_PLAYERS > MEM_SIZE || REG_NUMBER <= 0 ||
 	T_REG == T_DIR || T_REG == T_IND || T_IND == T_DIR ||
+	T_REG != REGISTER || T_DIR != DIRECT || T_IND != INDIRECT ||
 	PROG_NAME_LENGTH < 0 || COMMENT_LENGTH < 0)
 		error("op.h constants are invalid.");
 	check_char();

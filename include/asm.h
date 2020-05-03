@@ -6,16 +6,16 @@
 
 # define OP_NUM				16
 
-# define COMMAND_NAME		1
-# define COMMAND_COMMENT	2
-# define STRING				4
-# define LABEL				8
-# define INSTRUCTION		16
-# define REGISTER			32
-# define DIRECT				64
-# define DIRECT_LABEL		128
-# define INDIRECT			256
-# define INDIRECT_LABEL		512
+# define REGISTER			1
+# define DIRECT				2
+# define INDIRECT			4
+# define DIRECT_LABEL		8
+# define INDIRECT_LABEL		16
+# define COMMAND_NAME		32
+# define COMMAND_COMMENT	64
+# define STRING				128
+# define LABEL				256
+# define INSTRUCTION		512
 # define SEPARATOR			1024
 # define ENDLINE			2048
 # define END				4096
@@ -32,9 +32,9 @@ typedef unsigned char		t_byte;
 */
 
 typedef struct			s_label {
-	unsigned			i;
-	unsigned			len;
-	unsigned			byte_i;
+	int					i;
+	int					len;
+	int					byte_i;
 	struct s_label		*next;
 }						t_label;
 
@@ -44,19 +44,33 @@ typedef struct			s_label {
 ** nl -- number of the last \n in buff encountered
 ** nl_i -- index of the last \n in buff encountered
 ** byte_i -- number of the byte of the token pointed to by i in the output file
+** (excluding file head info -- magic header, command name, command exec code
+** size, command comment and nulls)
 */
 
 typedef struct			s_asm {
 	char				buff[BUFF_SIZE];
-	unsigned			i;
-	unsigned			j;
-	unsigned			nl;
-	unsigned			nl_i;
-	unsigned			byte_i;
+	int					i;
+	int					j;
+	int					nl;
+	int					nl_i;
+	int					byte_i;
 	t_header			header;
 	t_label				*ht[HASH_SIZE];
 
 }						t_asm;
+
+typedef struct			s_op
+{
+	char				name[5];
+	int					typebyte;
+	int					argnum;
+	char				args[3];
+	int					dirsize;
+	int					lag;
+}						t_op;
+
+extern const t_op		g_tab[];
 
 void					sys_error(char *s);
 void					error(char *s);

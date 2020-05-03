@@ -42,7 +42,7 @@ void		error2(char *s, char *t)
 
 static void	next_newline(t_asm *a)
 {
-	unsigned i;
+	int		i;
 
 	i = a->nl_i;
 	while (a->buff[i] != '\0' && a->buff[i] != '\n')
