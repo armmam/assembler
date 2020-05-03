@@ -9,9 +9,7 @@ int		main(int ac, char **av)
 	check_invariants();
 	input(&a, ac, av);
 	if (ac == 2)
-	{
 		usage();
-	}
 	else
 		ft_printf("usage: ./asm file\n");
 	return (0);

@@ -11,13 +11,13 @@ unsigned		name(t_asm *a)
 	if (ft_strnequ(&a->buff[a->i], NAME_CMD_STRING,
 	ft_strlen(NAME_CMD_STRING)))
 	{
-		a->j = ft_strlen(NAME_CMD_STRING);
+		a->j += ft_strlen(NAME_CMD_STRING);
 		return (COMMAND_NAME);
 	}
 	else if (ft_strnequ(&a->buff[a->i], COMMENT_CMD_STRING,
 	ft_strlen(COMMENT_CMD_STRING)))
 	{
-		a->j = ft_strlen(COMMENT_CMD_STRING);
+		a->j += ft_strlen(COMMENT_CMD_STRING);
 		return (COMMAND_COMMENT);
 	}
 	else
@@ -33,11 +33,15 @@ unsigned		name(t_asm *a)
 
 unsigned		string(t_asm *a)
 {
+	++a->j;
 	while (a->buff[a->j] != '\"' && a->buff[a->j++] != '\0')
 		if (a->buff[a->j] == '\n')
 			endl(a);
 	if (a->buff[a->j] == '\"')
+	{
+		++a->j;
 		return (STRING);
+	}
 	else
 	{
 		error3("Invalid string", a);

@@ -80,5 +80,5 @@ unsigned	char_token(t_asm *a)
 		return (endl(a));
 	}
 	a->i = ++a->j;
-	return (a->buff[a->i++] == SEPARATOR_CHAR ? SEPARATOR : endl(a));
+	return (a->buff[a->i] == SEPARATOR_CHAR ? SEPARATOR : endl(a));
 }
