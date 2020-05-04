@@ -1,6 +1,6 @@
 NAME = asm
 CC = gcc
-FLAGS = -Wall -Wextra -Werror
+FLAGS = -Wall -Wextra -Werror -MMD
 HEAD_DIR = include
 SRC_DIR = src
 OBJ_DIR = obj
@@ -20,7 +20,7 @@ $(NAME): $(OBJ) $(LIBFT)
 	$(CC) $(FLAGS) -o $(NAME) $(OBJ) $(LIBFT)
 
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c | $(OBJ_DIR)
-	$(CC) $(FLAGS) -I$(HEAD_DIR) -I$(LIBFT_HEAD) -o $@ -c $< -MMD
+	$(CC) $(FLAGS) -I$(HEAD_DIR) -I$(LIBFT_HEAD) -o $@ -c $<
 
 $(OBJ_DIR):
 	mkdir -p $(OBJ_DIR)

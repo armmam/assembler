@@ -11,7 +11,7 @@ unsigned	neg_indirect(t_asm *a)
 		error3("Invalid indirect", a);
 	while (ft_isdigit(a->buff[a->j]))
 		++a->j;
-	return (INDIRECT);
+	return ((a->last_token = INDIRECT));
 }
 
 /*
@@ -28,7 +28,7 @@ unsigned	direct(t_asm *a)
 	if (a->buff[a->i + 1] != LABEL_CHAR)
 	{
 		if (a->j - a->i != 1)
-			return (DIRECT);
+			return ((a->last_token = DIRECT));
 		else
 		{
 			error3("Invalid direct", a);
@@ -38,7 +38,7 @@ unsigned	direct(t_asm *a)
 	else
 	{
 		if (a->j - a->i != 2)
-			return (DIRECT_LABEL);
+			return ((a->last_token = DIRECT_LABEL));
 		else
 		{
 			error3("Invalid direct label", a);
@@ -57,7 +57,7 @@ unsigned	indirect_label(t_asm *a)
 	while (ft_strchr(LABEL_CHARS, a->buff[a->j]))
 		++a->j;
 	if (a->j - a->i != 1)
-		return (INDIRECT_LABEL);
+		return ((a->last_token = INDIRECT_LABEL));
 	else
 	{
 		error3("Invalid indirect label", a);
@@ -80,5 +80,6 @@ unsigned	char_token(t_asm *a)
 		return (endl(a));
 	}
 	a->i = ++a->j;
-	return (a->buff[a->i] == SEPARATOR_CHAR ? SEPARATOR : endl(a));
+	return (a->buff[a->i] == SEPARATOR_CHAR ?
+	(a->last_token = SEPARATOR) : endl(a));
 }

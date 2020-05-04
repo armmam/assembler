@@ -9,7 +9,7 @@ unsigned		endl(t_asm *a)
 {
 	a->nl_i = a->j;
 	++a->nl;
-	return (ENDLINE);
+	return ((a->last_token = ENDLINE));
 }
 
 static void		skip_spaces(t_asm *a)
@@ -32,7 +32,9 @@ static void		skip_spaces(t_asm *a)
 unsigned		tokenize(t_asm *a)
 {
 	skip_spaces(a);
-	if (a->buff[a->i] == NAME_CMD_STRING[0])
+	if (a->buff[a->i] == '\0')
+		return ((a->last_token = END)); // END
+	else if (a->buff[a->i] == NAME_CMD_STRING[0])
 		return (name(a)); // COMMAND_NAME or COMMAND_COMMENT
 	else if (a->buff[a->i] == '"')
 		return (string(a)); // STRING
@@ -48,8 +50,6 @@ unsigned		tokenize(t_asm *a)
 	else if (a->buff[a->i] == SEPARATOR_CHAR ||
 	a->buff[a->i] == COMMENT_CHAR || a->buff[a->i] == '\n') // SEPARATOR / comment / ENDLINE
 		return (char_token(a));
-	else if (a->buff[a->i] == '\0')
-		return (END); // END
 	else
 	{
 		error("Unknown token.");

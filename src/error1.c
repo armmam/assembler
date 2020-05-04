@@ -44,10 +44,26 @@ static void	next_newline(t_asm *a)
 {
 	int		i;
 
-	i = a->nl_i;
-	while (a->buff[i] != '\0' && a->buff[i] != '\n')
-		++i;
-	a->buff[i] = '\0';
+	if (a->last_token == ENDLINE)
+	{
+		--a->nl;
+		a->buff[--a->nl_i] = '\0';
+		if (a->nl_i)
+		{
+			--a->nl_i;
+			while (a->nl_i && a->buff[a->nl_i] != '\n')
+				--a->nl_i;
+			if (a->buff[a->nl_i] == '\n')
+				++a->nl_i;
+		}
+	}
+	else
+	{
+		i = a->nl_i;
+		while (a->buff[i] != '\0' && a->buff[i] != '\n')
+			++i;
+		a->buff[i] = '\0';
+	}
 }
 
 /*

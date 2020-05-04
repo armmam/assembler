@@ -12,13 +12,13 @@ unsigned		name(t_asm *a)
 	ft_strlen(NAME_CMD_STRING)))
 	{
 		a->j += ft_strlen(NAME_CMD_STRING);
-		return (COMMAND_NAME);
+		return ((a->last_token = COMMAND_NAME));
 	}
 	else if (ft_strnequ(&a->buff[a->i], COMMENT_CMD_STRING,
 	ft_strlen(COMMENT_CMD_STRING)))
 	{
 		a->j += ft_strlen(COMMENT_CMD_STRING);
-		return (COMMAND_COMMENT);
+		return ((a->last_token = COMMAND_COMMENT));
 	}
 	else
 	{
@@ -40,7 +40,7 @@ unsigned		string(t_asm *a)
 	if (a->buff[a->j] == '\"')
 	{
 		++a->j;
-		return (STRING);
+		return ((a->last_token = STRING));
 	}
 	else
 	{
@@ -74,7 +74,7 @@ static unsigned	instruction(t_asm *a)
 	while (i < OP_NUM)
 	{
 		if (ft_strnequ(&a->buff[a->i], tab[i], ft_strlen(tab[i])))
-			return (INSTRUCTION);
+			return ((a->last_token = INSTRUCTION));
 			++i;
 	}
 	error3("Invalid instruction", a);
@@ -97,15 +97,15 @@ unsigned		text(t_asm *a)
 	(ft_isalnum(a->buff[a->j]) && ft_tolower(a->buff[a->j]) == a->buff[a->j]))
 		++a->j;
 	if (a->buff[a->j] == LABEL_CHAR)
-		return (LABEL);
+		return ((a->last_token = LABEL));
 	else if (a->buff[a->i] == 'r' && ((a->j - a->i == (int)ft_strlen("r1") &&
 	!ft_strnequ(&a->buff[a->i], "r0", ft_strlen("r0")) &&
 	ft_isdigit(a->buff[a->j - 1])) || (a->j - a->i == (int)ft_strlen("r01") &&
 	ft_isdigit(a->buff[a->j - 1]) && ft_isdigit(a->buff[a->j - 2]) &&
 	!ft_strnequ(&a->buff[a->i], "r00", ft_strlen("r00")))))
-		return (REGISTER);
+		return ((a->last_token = REGISTER));
 	else if (ft_strnnum(&a->buff[a->i], a->j - a->i))
-		return (INDIRECT);
+		return ((a->last_token = INDIRECT));
 	else
 		return (instruction(a));
 }

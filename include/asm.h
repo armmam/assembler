@@ -46,6 +46,7 @@ typedef struct			s_label {
 ** byte_i -- number of the byte of the token pointed to by i in the output file
 ** (excluding file head info -- magic header, command name, command exec code
 ** size, command comment and nulls)
+** last_token -- the latest (last) recognized token: used in error3 functon
 */
 
 typedef struct			s_asm {
@@ -55,6 +56,7 @@ typedef struct			s_asm {
 	int					nl;
 	int					nl_i;
 	int					byte_i;
+	unsigned			last_token;
 	t_header			header;
 	t_label				*ht[HASH_SIZE];
 
