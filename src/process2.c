@@ -74,8 +74,8 @@ void		input_body(t_asm *a)
 	{
 		if (token == LABEL)
 		{
-			token = tokenize(a);
 			ht_insert(a);
+			token = tokenize(a);
 		}
 		if (token == INSTRUCTION)
 			input_instruction(a);

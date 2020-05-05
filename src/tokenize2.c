@@ -100,7 +100,10 @@ unsigned		text(t_asm *a)
 	(ft_isalnum(a->buff[a->j]) && ft_tolower(a->buff[a->j]) == a->buff[a->j])))
 		++a->j;
 	if (a->buff[a->j] == LABEL_CHAR)
-		return ((a->last_token = LABEL));
+	{
+		++a->j;
+		return (a->last_token = LABEL);
+	}
 	else if (a->buff[a->i] == 'r' && ((a->j - a->i == (int)ft_strlen("r1") &&
 	!ft_strnequ(&a->buff[a->i], "r0", ft_strlen("r0")) &&
 	ft_isdigit(a->buff[a->j - 1])) || (a->j - a->i == (int)ft_strlen("r01") &&
