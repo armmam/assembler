@@ -34,8 +34,8 @@ unsigned		name(t_asm *a)
 unsigned		string(t_asm *a)
 {
 	++a->j;
-	while (a->buff[a->j] != '\"' && a->buff[a->j++] != '\0')
-		if (a->buff[a->j] == '\n')
+	while (a->buff[a->j] != '\"' && a->buff[a->j] != '\0')
+		if (a->buff[a->j++] == '\n')
 			endl(a);
 	if (a->buff[a->j] == '\"')
 	{
@@ -44,7 +44,7 @@ unsigned		string(t_asm *a)
 	}
 	else
 	{
-		error3("Invalid string", a);
+		error("Invalid string");
 		return (0);
 	}
 }

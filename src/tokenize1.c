@@ -9,7 +9,7 @@ unsigned		endl(t_asm *a)
 {
 	a->nl_i = a->j;
 	++a->nl;
-	return ((a->last_token = ENDLINE));
+	return (ENDLINE);
 }
 
 static void		skip_spaces(t_asm *a)

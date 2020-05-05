@@ -77,9 +77,10 @@ unsigned	char_token(t_asm *a)
 			++a->j;
 		if (a->buff[a->j] == '\0')
 			error("No newline at end of file.");
-		return (endl(a));
+		a->i = ++a->j;
+		return ((a->last_token = endl(a)));
 	}
 	a->i = ++a->j;
-	return (a->buff[a->i] == SEPARATOR_CHAR ?
-	(a->last_token = SEPARATOR) : endl(a));
+	return (a->buff[a->i - 1] == SEPARATOR_CHAR ?
+	(a->last_token = SEPARATOR) : (a->last_token = endl(a)));
 }
