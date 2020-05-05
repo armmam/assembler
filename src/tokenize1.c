@@ -33,12 +33,12 @@ unsigned		tokenize(t_asm *a)
 {
 	skip_spaces(a);
 	if (a->buff[a->i] == '\0')
-		return (a->last_token = END); // END
+		return (a->token = END); // END
 	else if (a->buff[a->i] == NAME_CMD_STRING[0])
 		return (header(a)); // COMMAND_NAME or COMMAND_COMMENT
 	else if (a->buff[a->i] == '"')
 		return (string(a)); // STRING
-	else if (ft_strchr(LABEL_CHARS, a->buff[a->i]) || a->buff[a->i] == '-' ||
+	else if (ft_strchr(LABEL_CHARS, a->buff[a->i]) ||
 	(ft_isalnum(a->buff[a->i]) && ft_tolower(a->buff[a->i]) == a->buff[a->i]))
 		return (text(a)); // INSTRUCTION / LABEL / REGISTER / INDIRECT
 	else if (a->buff[a->i] == '-')
@@ -52,7 +52,7 @@ unsigned		tokenize(t_asm *a)
 		return (char_token(a));
 	else
 	{
-		a->last_token = 0;
+		a->token = 0;
 		error3("Unknown token", a);
 		return (0);
 	}

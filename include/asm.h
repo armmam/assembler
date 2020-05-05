@@ -5,6 +5,7 @@
 # define BUFF_SIZE 			32767
 
 # define OP_NUM				16
+# define REG_NUM_SIZE		1
 
 # define REGISTER			1
 # define DIRECT				2
@@ -56,7 +57,7 @@ typedef struct			s_asm {
 	int					nl;
 	int					nl_i;
 	int					byte_i;
-	unsigned			last_token;
+	unsigned			token;
 	t_header			header;
 	unsigned			header_flag;
 	t_label				*ht[HASH_SIZE];

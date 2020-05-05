@@ -61,6 +61,7 @@ void		check_invariants(void)
 	if (BUFF_SIZE != SHRT_MAX && BUFF_SIZE != USHRT_MAX)
 		error("asm.h constants are invalid.");
 	if (NAME_CMD_STRING[0] != COMMENT_CMD_STRING[0] ||
+	!ft_strlen(NAME_CMD_STRING) ||
 	ft_strequ(NAME_CMD_STRING, COMMENT_CMD_STRING) ||
 	ft_strstr(NAME_CMD_STRING, COMMENT_CMD_STRING) ||
 	ft_strstr(COMMENT_CMD_STRING, NAME_CMD_STRING) ||

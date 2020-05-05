@@ -1,11 +1,11 @@
 #include "asm.h"
 #include "libft.h"
 
-static int	arg_size(const t_op *op, unsigned token)
+static int	arg_size(t_asm *a, const t_op *op)
 {
-	if (token == REGISTER)
-		return (REG_SIZE);
-	else if (token == INDIRECT)
+	if (a->token == REGISTER)
+		return (REG_NUM_SIZE);
+	else if (a->token == INDIRECT || a->token == INDIRECT_LABEL)
 		return (IND_SIZE);
 	else
 		return (op->dirsize);
@@ -22,7 +22,6 @@ static void	input_instruction(t_asm *a)
 {
 	int			i;
 	int			j;
-	unsigned	token;
 
 	i = 0;
 	while (i < OP_NUM &&
@@ -38,12 +37,14 @@ static void	input_instruction(t_asm *a)
 	{
 		if (j != 0 && tokenize(a) != SEPARATOR)
 			error3("Expected separator", a);
-		if ((token = tokenize(a)) & g_tab[i].args[j])
-			a->byte_i += arg_size(&g_tab[i], token);
+		if (tokenize(a) & g_tab[i].args[j] || (a->token == DIRECT_LABEL && 
+		DIRECT & g_tab[i].args[j]) || (a->token == INDIRECT_LABEL &&
+		INDIRECT & g_tab[i].args[j]))
+			a->byte_i += arg_size(a, &g_tab[i]);
 		else
 			error3("Invalid argument", a);
+		++j;
 	}
-	token = tokenize(a);
 }
 
 /*
@@ -68,18 +69,19 @@ that the next token is ENDLINE, if END then EXIT_FAILURE).
 
 void		input_body(t_asm *a)
 {
-	unsigned	token;
-
-	while ((token = tokenize(a)) != END)
+	while (tokenize(a) != END)
 	{
-		if (token == LABEL)
+		if (a->token == LABEL)
 		{
 			ht_insert(a);
-			token = tokenize(a);
+			tokenize(a);
 		}
-		if (token == INSTRUCTION)
+		if (a->token == INSTRUCTION)
+		{
 			input_instruction(a);
-		if (token != ENDLINE)
+			tokenize(a);
+		}
+		if (a->token != ENDLINE)
 			error3("Expected newline", a);
 	}
 }

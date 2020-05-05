@@ -8,7 +8,7 @@
 
 unsigned		header(t_asm *a)
 {
-	a->last_token = COMMAND_NAME;
+	a->token = COMMAND_NAME;
 	if (ft_strnequ(&a->buff[a->i], NAME_CMD_STRING,
 	ft_strlen(NAME_CMD_STRING)))
 	{
@@ -19,7 +19,7 @@ unsigned		header(t_asm *a)
 	ft_strlen(COMMENT_CMD_STRING)))
 	{
 		a->j += ft_strlen(COMMENT_CMD_STRING);
-		return (a->last_token = COMMAND_COMMENT);
+		return (a->token = COMMAND_COMMENT);
 	}
 	else
 	{
@@ -34,7 +34,7 @@ unsigned		header(t_asm *a)
 
 unsigned		string(t_asm *a)
 {
-	a->last_token = STRING;
+	a->token = STRING;
 	++a->j;
 	while (a->buff[a->j] != '\"' && a->buff[a->j] != '\0')
 		if (a->buff[a->j++] == '\n')
@@ -64,6 +64,9 @@ static int		ft_strnnum(const char *s, int num)
 	}
 	return (1);
 }
+/*
+** Try to process the token as INSTRUCTION. Exit with error if failed.
+*/
 
 static unsigned	instruction(t_asm *a)
 {
@@ -72,7 +75,7 @@ static unsigned	instruction(t_asm *a)
 	"aff"};
 	int					i;
 
-	a->last_token = INSTRUCTION;
+	a->token = INSTRUCTION;
 	i = 0;
 	while (i < OP_NUM)
 	{
@@ -80,7 +83,7 @@ static unsigned	instruction(t_asm *a)
 			return (INSTRUCTION);
 		++i;
 	}
-	error3("Invalid instruction", a);
+	error3("Invalid instruction, indirect or registry", a);
 	return (0);
 }
 
@@ -96,22 +99,21 @@ static unsigned	instruction(t_asm *a)
 
 unsigned		text(t_asm *a)
 {
-	while (a->buff[a->j] != '\0' && (ft_strchr(LABEL_CHARS, a->buff[a->j]) ||
-	(ft_isalnum(a->buff[a->j]) && ft_tolower(a->buff[a->j]) == a->buff[a->j])))
+	while (a->buff[a->j] != '\0' && ft_strchr(LABEL_CHARS, a->buff[a->j]))
 		++a->j;
-	if (a->buff[a->j] == LABEL_CHAR)
-	{
+	if (a->buff[a->j] == LABEL_CHAR && ++a->j)
+		return (a->token = LABEL);
+	while (ft_isalnum(a->buff[a->j]) &&
+	ft_tolower(a->buff[a->j]) == a->buff[a->j])
 		++a->j;
-		return (a->last_token = LABEL);
-	}
-	else if (a->buff[a->i] == 'r' && ((a->j - a->i == (int)ft_strlen("r1") &&
+	if (a->buff[a->i] == 'r' && ((a->j - a->i == (int)ft_strlen("r1") &&
 	!ft_strnequ(&a->buff[a->i], "r0", ft_strlen("r0")) &&
 	ft_isdigit(a->buff[a->j - 1])) || (a->j - a->i == (int)ft_strlen("r01") &&
 	ft_isdigit(a->buff[a->j - 1]) && ft_isdigit(a->buff[a->j - 2]) &&
 	!ft_strnequ(&a->buff[a->i], "r00", ft_strlen("r00")))))
-		return (a->last_token = REGISTER);
+		return (a->token = REGISTER);
 	else if (ft_strnnum(&a->buff[a->i], a->j - a->i))
-		return (a->last_token = INDIRECT);
+		return (a->token = INDIRECT);
 	else
 		return (instruction(a));
 }

@@ -44,7 +44,7 @@ static void	next_newline(t_asm *a)
 {
 	int		i;
 
-	if (a->last_token == ENDLINE)
+	if (a->token == ENDLINE)
 	{
 		--a->nl;
 		a->buff[--a->nl_i] = '\0';

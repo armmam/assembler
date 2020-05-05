@@ -47,21 +47,19 @@ static void	input_comment(t_asm *a)
 
 void		input_head(t_asm *a)
 {
-	unsigned	token;
-
 	while (!(a->header_flag & COMMAND_COMMENT) ||
 	!(a->header_flag & COMMAND_NAME))
 	{
-		while ((token = tokenize(a)) == ENDLINE)
+		while (tokenize(a) == ENDLINE)
 		{
 		}
-		if (token == COMMAND_NAME)
+		if (a->token == COMMAND_NAME)
 			input_name(a);
-		else if (token == COMMAND_COMMENT)
+		else if (a->token == COMMAND_COMMENT)
 			input_comment(a);
 		else
-			error3("Expected command name/comment keyword", a);
+			error3("Expected command name or comment keyword", a);
 		if (tokenize(a) != ENDLINE)
-			error3("Expected newline after command name/comment string", a);
+			error3("Expected newline after command name or comment string", a);
 	}
 }
