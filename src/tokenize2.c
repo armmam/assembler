@@ -78,7 +78,7 @@ static unsigned	instruction(t_asm *a)
 	{
 		if (ft_strnequ(&a->buff[a->i], tab[i], ft_strlen(tab[i])))
 			return (INSTRUCTION);
-			++i;
+		++i;
 	}
 	error3("Invalid instruction", a);
 	return (0);

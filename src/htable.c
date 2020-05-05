@@ -39,7 +39,6 @@ t_label			*ht_search(t_asm *a)
 
 void			ht_insert(t_asm *a)
 {
-	//static t_label	label;
 	t_label		*label;
 
 	if (!(label = (t_label*)ft_memalloc(sizeof(t_label))))
