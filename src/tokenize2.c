@@ -2,17 +2,18 @@
 #include "libft.h"
 
 /*
-** Try to process the token as COMMAND_NAME or COMMENT_NAME. Exit with error if
-** failed.
+** Try to process the token as COMMAND_NAME or COMMAND_COMMENT. Exit with error
+** if failed.
 */
 
-unsigned		name(t_asm *a)
+unsigned		header(t_asm *a)
 {
+	a->last_token = COMMAND_NAME;
 	if (ft_strnequ(&a->buff[a->i], NAME_CMD_STRING,
 	ft_strlen(NAME_CMD_STRING)))
 	{
 		a->j += ft_strlen(NAME_CMD_STRING);
-		return ((a->last_token = COMMAND_NAME));
+		return (COMMAND_NAME);
 	}
 	else if (ft_strnequ(&a->buff[a->i], COMMENT_CMD_STRING,
 	ft_strlen(COMMENT_CMD_STRING)))
@@ -22,7 +23,7 @@ unsigned		name(t_asm *a)
 	}
 	else
 	{
-		error3("Invalid command/comment name", a);
+		error3("Invalid command name/comment keyword", a);
 		return (0);
 	}
 }
@@ -33,6 +34,7 @@ unsigned		name(t_asm *a)
 
 unsigned		string(t_asm *a)
 {
+	a->last_token = STRING;
 	++a->j;
 	while (a->buff[a->j] != '\"' && a->buff[a->j] != '\0')
 		if (a->buff[a->j++] == '\n')
@@ -40,11 +42,11 @@ unsigned		string(t_asm *a)
 	if (a->buff[a->j] == '\"')
 	{
 		++a->j;
-		return ((a->last_token = STRING));
+		return (STRING);
 	}
 	else
 	{
-		error("Invalid string");
+		error3("Invalid string", a);
 		return (0);
 	}
 }
@@ -70,11 +72,12 @@ static unsigned	instruction(t_asm *a)
 	"aff"};
 	int					i;
 
+	a->last_token = INSTRUCTION;
 	i = 0;
 	while (i < OP_NUM)
 	{
 		if (ft_strnequ(&a->buff[a->i], tab[i], ft_strlen(tab[i])))
-			return ((a->last_token = INSTRUCTION));
+			return (INSTRUCTION);
 			++i;
 	}
 	error3("Invalid instruction", a);
@@ -93,8 +96,8 @@ static unsigned	instruction(t_asm *a)
 
 unsigned		text(t_asm *a)
 {
-	while (ft_strchr(LABEL_CHARS, a->buff[a->j]) ||
-	(ft_isalnum(a->buff[a->j]) && ft_tolower(a->buff[a->j]) == a->buff[a->j]))
+	while (a->buff[a->j] != '\0' && (ft_strchr(LABEL_CHARS, a->buff[a->j]) ||
+	(ft_isalnum(a->buff[a->j]) && ft_tolower(a->buff[a->j]) == a->buff[a->j])))
 		++a->j;
 	if (a->buff[a->j] == LABEL_CHAR)
 		return ((a->last_token = LABEL));

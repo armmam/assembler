@@ -3,30 +3,40 @@
 
 static void	input_name(t_asm *a)
 {
+	if (a->header_flag & COMMAND_NAME)
+		error3("Another command name keyword", a);
 	if (tokenize(a) == STRING)
 	{
 		if (a->j - a->i - 2 <= PROG_NAME_LENGTH)
+		{
 			ft_strncpy(a->header.prog_name, &a->buff[a->i + 1],
 			a->j - a->i - 2);
+			a->header_flag |= COMMAND_NAME;
+		}
 		else
-			error3("Invalid program name length", a);
+			error3("Invalid command name string length", a);
 	}
 	else
-		error3("Invalid program name syntax", a);
+		error3("Expected string after command name keyword", a);
 }
 
 static void	input_comment(t_asm *a)
 {
+	if (a->header_flag & COMMAND_COMMENT)
+		error3("Another command comment keyword", a);
 	if (tokenize(a) == STRING)
 	{
 		if (a->j - a->i - 2 <= COMMENT_LENGTH)
+		{
 			ft_strncpy(a->header.comment, &a->buff[a->i + 1],
 			a->j - a->i - 2);
+			a->header_flag |= COMMAND_COMMENT;
+		}
 		else
-			error3("Invalid comment length", a);
+			error3("Invalid command comment string length", a);
 	}
 	else
-		error3("Invalid comment syntax", a);
+		error3("Expected string after command comment keyword", a);
 }
 
 /*
@@ -38,23 +48,20 @@ static void	input_comment(t_asm *a)
 void		input_head(t_asm *a)
 {
 	unsigned	token;
-	int			prog_name;
-	int			comment;
 
-	prog_name = 0;
-	comment = 0;
-	while (!prog_name || !comment)
+	while (!(a->header_flag & COMMAND_COMMENT) ||
+	!(a->header_flag & COMMAND_NAME))
 	{
 		while ((token = tokenize(a)) == ENDLINE)
 		{
 		}
-		if (token == COMMAND_NAME && (prog_name = 1))
+		if (token == COMMAND_NAME)
 			input_name(a);
-		else if (token == COMMAND_COMMENT && (comment = 1))
+		else if (token == COMMAND_COMMENT)
 			input_comment(a);
 		else
-			error3("Expected program name/comment", a);
+			error3("Expected command name/comment keyword", a);
 		if (tokenize(a) != ENDLINE)
-			error3("Expected newline after name/comment", a);
+			error3("Expected newline after command name/comment string", a);
 	}
 }
