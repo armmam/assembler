@@ -33,7 +33,7 @@ unsigned		tokenize(t_asm *a)
 {
 	skip_spaces(a);
 	if (a->buff[a->i] == '\0')
-		return ((a->last_token = END)); // END
+		return (a->last_token = END); // END
 	else if (a->buff[a->i] == NAME_CMD_STRING[0])
 		return (header(a)); // COMMAND_NAME or COMMAND_COMMENT
 	else if (a->buff[a->i] == '"')

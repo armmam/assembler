@@ -26,7 +26,7 @@ static void	input_instruction(t_asm *a)
 
 	i = 0;
 	while (i < OP_NUM &&
-	!ft_strnequ(&a->buff[a->i], g_tab[i].name, a->j - a->i + 1))
+	!ft_strnequ(&a->buff[a->i], g_tab[i].name, a->j - a->i))
 		++i;
 	if (i == OP_NUM)
 		error3("Invalid instruction", a);

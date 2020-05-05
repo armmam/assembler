@@ -50,7 +50,7 @@ typedef struct			s_label {
 */
 
 typedef struct			s_asm {
-	char				buff[BUFF_SIZE];
+	char				buff[BUFF_SIZE + 1];
 	int					i;
 	int					j;
 	int					nl;

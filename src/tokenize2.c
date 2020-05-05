@@ -19,7 +19,7 @@ unsigned		header(t_asm *a)
 	ft_strlen(COMMENT_CMD_STRING)))
 	{
 		a->j += ft_strlen(COMMENT_CMD_STRING);
-		return ((a->last_token = COMMAND_COMMENT));
+		return (a->last_token = COMMAND_COMMENT);
 	}
 	else
 	{
@@ -109,9 +109,9 @@ unsigned		text(t_asm *a)
 	ft_isdigit(a->buff[a->j - 1])) || (a->j - a->i == (int)ft_strlen("r01") &&
 	ft_isdigit(a->buff[a->j - 1]) && ft_isdigit(a->buff[a->j - 2]) &&
 	!ft_strnequ(&a->buff[a->i], "r00", ft_strlen("r00")))))
-		return ((a->last_token = REGISTER));
+		return (a->last_token = REGISTER);
 	else if (ft_strnnum(&a->buff[a->i], a->j - a->i))
-		return ((a->last_token = INDIRECT));
+		return (a->last_token = INDIRECT);
 	else
 		return (instruction(a));
 }
