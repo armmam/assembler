@@ -34,13 +34,23 @@ unsigned		header(t_asm *a)
 
 unsigned		string(t_asm *a)
 {
+	int		nl;
+	int		nl_i;
+
+	nl = 0;
+	nl_i = 0;
 	a->token = STRING;
 	++a->j;
 	while (a->buff[a->j] != '\"' && a->buff[a->j] != '\0')
 		if (a->buff[a->j++] == '\n')
-			endl(a);
+		{
+			++nl;
+			nl_i = a->j;
+		}
 	if (a->buff[a->j] == '\"')
 	{
+		a->nl += nl;
+		a->nl_i = nl_i > 0 ? nl_i : a->nl_i;
 		++a->j;
 		return (STRING);
 	}
@@ -83,7 +93,7 @@ static unsigned	instruction(t_asm *a)
 			return (INSTRUCTION);
 		++i;
 	}
-	error3("Invalid instruction, indirect or registry", a);
+	error3("Invalid instruction, indirect or register", a);
 	return (0);
 }
 

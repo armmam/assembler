@@ -71,6 +71,9 @@ void		input_body(t_asm *a)
 {
 	while (tokenize(a) != END)
 	{
+		if (a->token != LABEL && a->token != INSTRUCTION &&
+		a->token != ENDLINE)
+			error3("Expected another line start", a);
 		if (a->token == LABEL)
 		{
 			ht_insert(a);

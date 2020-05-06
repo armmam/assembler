@@ -53,7 +53,7 @@ unsigned		tokenize(t_asm *a)
 	else
 	{
 		a->token = 0;
-		error3("Unknown token", a);
+		error3("Syntax error", a);
 		return (0);
 	}
 }
