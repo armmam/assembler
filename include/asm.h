@@ -86,6 +86,9 @@ void					check_invariants(void);
 void					input(t_asm *a, int ac, char **av);
 void					input_head(t_asm *a);
 void					input_body(t_asm *a);
+void					input_labels(t_asm *a);
+
+void					reset_indices(t_asm *a);
 
 unsigned				tokenize(t_asm *a);
 unsigned				header(t_asm *a);

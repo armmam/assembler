@@ -13,19 +13,31 @@ static unsigned	hash(char *s, int n)
 
 /*
 ** Search for a token in the hash table. If the token is not present in the
-** hast table, return NULL (the function that invoked this one should exit in
+** hash table, return NULL (the function that invoked this one should exit in
 ** this case).
 */
 
 t_label			*ht_search(t_asm *a)
 {
 	t_label	*label;
+	int		i;
+	int		len;
 
-	label = a->ht[hash(&a->buff[a->i], a->j - a->i - 1)];
+	if (a->token == DIRECT_LABEL || a->token == INDIRECT_LABEL)
+	{
+		i = a->token == DIRECT_LABEL ? a->i + 2 : a->i + 1;
+		len = a->j - i;
+	}
+	else // a->token == LABEL
+	{
+		i = a->i;
+		len = a->j - i - 1;
+	}
+	label = a->ht[hash(&a->buff[i], len)];
 	while (label)
 	{
-		if (a->j - a->i - 1 == label->len &&
-		ft_strnequ(&a->buff[a->i], &a->buff[label->i], label->len))
+		if (len == label->len &&
+		ft_strnequ(&a->buff[i], &a->buff[label->i], label->len))
 			return (label);
 		label = label->next;
 	}

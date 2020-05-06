@@ -16,6 +16,7 @@ static void	input_asm(t_asm *a)
 {
 	input_head(a);
 	input_body(a);
+	input_labels(a);
 	ft_printf("successful\n");
 	exit(EXIT_SUCCESS);
 }

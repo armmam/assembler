@@ -80,16 +80,14 @@ static int		ft_strnnum(const char *s, int num)
 
 static unsigned	instruction(t_asm *a)
 {
-	static const char	*tab[] = {"live", "ld", "st", "add", "sub",
-	"and", "or", "xor", "zjmp", "ldi", "sti", "sfork", "lld", "lldi", "lfork",
-	"aff"};
 	int					i;
 
 	a->token = INSTRUCTION;
 	i = 0;
 	while (i < OP_NUM)
 	{
-		if (ft_strnequ(&a->buff[a->i], tab[i], ft_strlen(tab[i])))
+		if (ft_strnequ(&a->buff[a->i], g_tab[i].name,
+		ft_strlen(g_tab[i].name)))
 			return (INSTRUCTION);
 		++i;
 	}

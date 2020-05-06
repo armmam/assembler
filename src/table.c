@@ -33,7 +33,7 @@ const t_op	g_tab[OP_NUM + 1] =
 	{"zjmp", 0, 1, {T_DIR, 0, 0}, IND_SIZE, 20},
 	{"ldi", 1, 3, {T_REG | T_DIR | T_IND, T_REG | T_DIR, T_REG}, IND_SIZE, 25},
 	{"sti", 1, 3, {T_REG, T_REG | T_DIR | T_IND, T_REG | T_DIR}, IND_SIZE, 25},
-	{"sfork", 0, 1, {T_DIR, 0, 0}, IND_SIZE, 800},
+	{"fork", 0, 1, {T_DIR, 0, 0}, IND_SIZE, 800},
 	{"lld", 1, 2, {T_DIR | T_IND, T_REG, 0}, DIR_SIZE, 10},
 	{"lldi", 1, 3, {T_REG | T_DIR | T_IND, T_REG | T_DIR, T_REG}, IND_SIZE,
 		50},
