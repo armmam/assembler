@@ -61,6 +61,7 @@ typedef struct			s_asm {
 	t_header			header;
 	unsigned			header_flag;
 	t_label				*ht[HASH_SIZE];
+	int					fd;
 
 }						t_asm;
 
@@ -88,8 +89,6 @@ void					input_head(t_asm *a);
 void					input_body(t_asm *a);
 void					input_labels(t_asm *a);
 
-void					reset_indices(t_asm *a);
-
 unsigned				tokenize(t_asm *a);
 unsigned				header(t_asm *a);
 unsigned				string(t_asm *a);
@@ -99,6 +98,9 @@ unsigned				direct(t_asm *a);
 unsigned				indirect_label(t_asm *a);
 unsigned				endl(t_asm *a);
 unsigned				char_token(t_asm *a);
+
+void					reset_indices(t_asm *a);
+void					output(t_asm *a, int ac, char **av);
 
 t_label					*ht_search(t_asm *a);
 void					ht_insert(t_asm *a);
