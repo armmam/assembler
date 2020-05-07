@@ -45,8 +45,9 @@ static void	input_comment(t_asm *a)
 ** be multiline).
 */
 
-void		input_head(t_asm *a)
+void		input_header(t_asm *a)
 {
+	a->header.magic = COREWAR_EXEC_MAGIC;
 	while (!(a->header_flag & COMMAND_COMMENT) ||
 	!(a->header_flag & COMMAND_NAME))
 	{

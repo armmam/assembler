@@ -17,7 +17,7 @@
 ** Corewar operations reference table
 */
 
-const t_op	g_tab[OP_NUM + 1] =
+const t_op	g_tab[INSTR_NUM + 1] =
 {
 	{"live", 0, 1, {T_DIR, 0, 0}, DIR_SIZE, 10},
 	{"ld", 1, 2, {T_DIR | T_IND, T_REG, 0}, DIR_SIZE, 5},

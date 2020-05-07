@@ -11,9 +11,5 @@ int		main(int ac, char **av)
 	output(&a, ac, av);
 	ft_printf("successful\n");
 	exit(EXIT_SUCCESS);
-	if (ac == 2)
-		usage();
-	else
-		ft_printf("usage: ./asm file\n");
 	return (0);
 }

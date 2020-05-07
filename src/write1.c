@@ -1,15 +1,40 @@
 #include "asm.h"
 #include "libft.h"
 #include <fcntl.h>
+#include <unistd.h>
+
+/*
+** Write multibyte data into a file using big-endian ordering
+*/
+
+void	write_bytes(int fd, t_byte *bytes, int size)
+{
+	int		i;
+
+	i = 0;
+	bytes += size - 1;
+	while (i++ < size)
+	{
+		write(fd, bytes, 1);
+		if (i != size)
+			--bytes;
+	}
+}
 
 static void	write_asm(t_asm *a)
 {
 	(void)a;
 }
 
-static void	write_bytes(t_asm *a)
+/*
+** Write contents of .s file as bytes into .cor file
+*/
+
+static void	write_bytecode(t_asm *a)
 {
 	reset_indices(a);
+	write_bytecode_header(a);
+	write_bytecode_body(a);
 }
 
 /*
@@ -34,7 +59,7 @@ static void	create_file(t_asm *a, int ac, char **av)
 			break ;
 		}
 	if (!(new_filename = ac == 3 ?
-	ft_strjoin(filename, ".s") : ft_strjoin(filename, ".cor")))
+	ft_strjoin(filename, ".s") : ft_strjoin(filename, ".corr")))
 		sys_error(NULL);
 	if ((a->fd = open(new_filename, O_WRONLY | O_CREAT, 0644)) < 0)
 		sys_error(new_filename);
@@ -52,5 +77,6 @@ void		output(t_asm *a, int ac, char **av)
 	if (ac == 3)
 		write_asm(a);
 	else
-		write_bytes(a);
+		write_bytecode(a);
+	close(a->fd);
 }

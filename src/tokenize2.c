@@ -84,7 +84,7 @@ static unsigned	instruction(t_asm *a)
 
 	a->token = INSTRUCTION;
 	i = 0;
-	while (i < OP_NUM)
+	while (i < INSTR_NUM)
 	{
 		if (ft_strnequ(&a->buff[a->i], g_tab[i].name,
 		ft_strlen(g_tab[i].name)))

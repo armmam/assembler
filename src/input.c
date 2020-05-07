@@ -14,7 +14,7 @@ static void	input_disasm(t_asm *a, int ac, char **av)
 
 static void	input_asm(t_asm *a)
 {
-	input_head(a);
+	input_header(a);
 	input_body(a);
 	input_labels(a);
 }
@@ -35,8 +35,8 @@ void		input(t_asm *a, int ac, char **av)
 
 	r = 0;
 	fd = 0;
-	if (((ac == 2 && (fd = open(av[1], O_RDONLY)) >= 0) || (ac == 3 &&
-	ft_strequ(av[1], "-d") && (fd = open(av[2], O_RDONLY)) >= 0)))
+	if ((ac == 2 && (fd = open(av[1], O_RDONLY)) >= 0) || (ac == 3 &&
+	ft_strequ(av[1], "-d") && (fd = open(av[2], O_RDONLY)) >= 0))
 	{
 		if ((r = read(fd, a->buff, BUFF_SIZE)) > 0 &&
 		(r = read(fd, a->buff, 1)) == 0)

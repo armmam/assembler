@@ -4,7 +4,7 @@
 
 # define BUFF_SIZE 			32767
 
-# define OP_NUM				16
+# define INSTR_NUM	16
 # define REG_NUM_SIZE		1
 
 # define REGISTER			1
@@ -85,9 +85,10 @@ void					usage(void);
 void					check_invariants(void);
 
 void					input(t_asm *a, int ac, char **av);
-void					input_head(t_asm *a);
+void					input_header(t_asm *a);
 void					input_body(t_asm *a);
 void					input_labels(t_asm *a);
+int						arg_size(t_asm *a, const t_op *op);
 
 unsigned				tokenize(t_asm *a);
 unsigned				header(t_asm *a);
@@ -101,6 +102,15 @@ unsigned				char_token(t_asm *a);
 
 void					reset_indices(t_asm *a);
 void					output(t_asm *a, int ac, char **av);
+void					write_bytes(int fd, t_byte *bytes, int size);
+void					write_bytecode_header(t_asm *a);
+void					write_bytecode_body(t_asm *a);
+void					write_reg(t_asm *a);
+void					write_dir(t_asm *a, int dirsize);
+void					write_ind(t_asm *a);
+void					write_dir_label(t_asm *a, int dirsize);
+void					write_ind_label(t_asm *a);
+int						antoi(char *nptr, int n);
 
 t_label					*ht_search(t_asm *a);
 void					ht_insert(t_asm *a);

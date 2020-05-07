@@ -1,7 +1,7 @@
 #include "asm.h"
 #include "libft.h"
 
-static int	arg_size(t_asm *a, const t_op *op)
+int			arg_size(t_asm *a, const t_op *op)
 {
 	if (a->token == REGISTER)
 		return (REG_NUM_SIZE);
@@ -24,10 +24,10 @@ static void	input_instruction(t_asm *a)
 	int			j;
 
 	i = 0;
-	while (i < OP_NUM &&
+	while (i < INSTR_NUM &&
 	!ft_strnequ(&a->buff[a->i], g_tab[i].name, a->j - a->i))
 		++i;
-	if (i == OP_NUM)
+	if (i == INSTR_NUM)
 		error3("Invalid instruction", a);
 	++a->byte_i;
 	if (g_tab[i].typebyte)
@@ -87,15 +87,16 @@ void		input_body(t_asm *a)
 		if (a->token != ENDLINE)
 			error3("Expected newline", a);
 	}
+	a->header.prog_size = a->byte_i;
 }
 
 void	reset_indices(t_asm *a)
 {
 	a->i = 0;
 	a->j = 0;
-	a->byte_i = 0;
 	a->nl = 0;
 	a->nl_i = 0;
+	a->byte_i = 0;
 	a->token = 0;
 }
 

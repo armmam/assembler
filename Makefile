@@ -8,7 +8,7 @@ LIBFT_DIR = libft
 LIBFT = $(LIBFT_DIR)/libft.a
 LIBFT_HEAD = $(LIBFT_DIR)/include
 HEAD_FILES = asm.h op.h
-SRC_FILES = main.c error1.c error2.c input.c process1.c process2.c tokenize1.c tokenize2.c tokenize3.c invariants.c htable.c table.c write.c
+SRC_FILES = main.c error1.c error2.c input.c process1.c process2.c tokenize1.c tokenize2.c tokenize3.c invariants.c htable.c table.c write1.c write2.c write3.c
 SRC = $(addprefix $(SRC_DIR)/, $(SRC_FILES))
 OBJ = $(patsubst $(SRC_DIR)/%.c, $(OBJ_DIR)/%.o, $(SRC))
 
