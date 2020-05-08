@@ -37,7 +37,7 @@ static void	input_instruction(t_asm *a)
 	{
 		if (j != 0 && tokenize(a) != SEPARATOR)
 			error3("Expected separator", a);
-		if (tokenize(a) & g_tab[i].args[j] || (a->token == DIRECT_LABEL && 
+		if (tokenize(a) & g_tab[i].args[j] || (a->token == DIRECT_LABEL &&
 		DIRECT & g_tab[i].args[j]) || (a->token == INDIRECT_LABEL &&
 		INDIRECT & g_tab[i].args[j]))
 			a->byte_i += arg_size(a, &g_tab[i]);
@@ -90,7 +90,7 @@ void		input_body(t_asm *a)
 	a->header.prog_size = a->byte_i;
 }
 
-void	reset_indices(t_asm *a)
+void		reset_indices(t_asm *a)
 {
 	a->i = 0;
 	a->j = 0;
@@ -108,7 +108,7 @@ void	reset_indices(t_asm *a)
 void		input_labels(t_asm *a)
 {
 	reset_indices(a);
-	while(tokenize(a) != END)
+	while (tokenize(a) != END)
 	{
 		if (a->token == DIRECT_LABEL || a->token == INDIRECT_LABEL)
 		{

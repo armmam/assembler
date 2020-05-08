@@ -7,7 +7,7 @@
 ** Write multibyte data into a file using big-endian ordering
 */
 
-void	write_bytes(int fd, t_byte *bytes, int size)
+void		write_bytes(int fd, t_byte *bytes, int size)
 {
 	int		i;
 

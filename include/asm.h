@@ -111,6 +111,9 @@ void					write_ind(t_asm *a);
 void					write_dir_label(t_asm *a, int dirsize);
 void					write_ind_label(t_asm *a);
 int						antoi(char *nptr, int n);
+void					write_dirsize_bytes(int fd, int dir, int dirsize);
+void					write_typebyte(int fd, t_op op, int *byte_i,
+						t_byte typebyte);
 
 t_label					*ht_search(t_asm *a);
 void					ht_insert(t_asm *a);

@@ -74,6 +74,7 @@ static int		ft_strnnum(const char *s, int num)
 	}
 	return (1);
 }
+
 /*
 ** Try to process the token as INSTRUCTION. Exit with error if failed.
 */
