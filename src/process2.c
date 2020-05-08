@@ -14,8 +14,6 @@ int			arg_size(t_asm *a, const t_op *op)
 /*
 ** Check that INSTRUCTION has valid number of arguments, valid argument syntax
 ** and no other instructions on the same line.
-**
-** a->i points to the beginning of INSTRUCTION token, a-j -- to its end.
 */
 
 static void	input_instruction(t_asm *a)
