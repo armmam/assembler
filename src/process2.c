@@ -54,17 +54,6 @@ static void	input_instruction(t_asm *a)
 ** types of arguments, all separated from each other with SEPARATOR_CHAR.
 ** Record each LABEL name and the number of a byte it points to in a hash
 ** table.
-**
-** If LABEL then record it in hash table, set label_flag to true (to take the
-** next instruction and save its place in memory into the same entry in hash
-** table -- or is it actually "the current" place in memory?), and whether
-** nothing else on the same line is allowed or exactly one INSTRUCTION (check
-that the next token is ENDLINE, if END then EXIT_FAILURE).
-**
-** If INSTRUCTION then, if label_flag is set to true then save the INSTRUCTION
-** place in memory into that hash table entry, make sure that it has proper
-** number and types of arguments, each separated by SEPARATOR_CHAR,
-** blahblahblah.
 */
 
 void		input_body(t_asm *a)

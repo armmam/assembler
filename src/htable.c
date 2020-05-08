@@ -28,7 +28,7 @@ t_label			*ht_search(t_asm *a)
 		i = a->token == DIRECT_LABEL ? a->i + 2 : a->i + 1;
 		len = a->j - i;
 	}
-	else // a->token == LABEL
+	else
 	{
 		i = a->i;
 		len = a->j - i - 1;

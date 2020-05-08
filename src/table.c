@@ -40,5 +40,4 @@ const t_op	g_tab[INSTR_NUM + 1] =
 		50},
 	{"lfork", 0, 1, {T_DIR, 0, 0}, IND_SIZE, 1000},
 	{"aff", 1, 1, {T_REG, 0, 0}, DIR_SIZE, 2}
-	
 };

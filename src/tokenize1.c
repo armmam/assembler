@@ -24,31 +24,28 @@ static void		skip_spaces(t_asm *a)
 ** beginning and the end of the token and return the token flag. If the token
 ** has unallowed chars in it, output corresponding error message and terminate
 ** the program.
-**
-** indices are handled carelessly: does a->j point to the last char in the
-** token or the first char after the token?
 */
 
 unsigned		tokenize(t_asm *a)
 {
 	skip_spaces(a);
 	if (a->buff[a->i] == '\0')
-		return (a->token = END); // END
+		return (a->token = END);
 	else if (a->buff[a->i] == NAME_CMD_STRING[0])
-		return (header(a)); // COMMAND_NAME or COMMAND_COMMENT
+		return (header(a));
 	else if (a->buff[a->i] == '"')
-		return (string(a)); // STRING
+		return (string(a));
 	else if (ft_strchr(LABEL_CHARS, a->buff[a->i]) ||
 	(ft_isalnum(a->buff[a->i]) && ft_tolower(a->buff[a->i]) == a->buff[a->i]))
-		return (text(a)); // INSTRUCTION / LABEL / REGISTER / INDIRECT
+		return (text(a));
 	else if (a->buff[a->i] == '-')
-		return (neg_indirect(a)); // INDIRECT
+		return (neg_indirect(a));
 	else if (a->buff[a->i] == DIRECT_CHAR)
-		return (direct(a)); // DIRECT / DIRECT_LABEL
+		return (direct(a));
 	else if (a->buff[a->i] == LABEL_CHAR)
-		return (indirect_label(a)); // INDIRECT_LABEL
+		return (indirect_label(a));
 	else if (a->buff[a->i] == SEPARATOR_CHAR ||
-	a->buff[a->i] == COMMENT_CHAR || a->buff[a->i] == '\n') // SEPARATOR / comment / ENDLINE
+	a->buff[a->i] == COMMENT_CHAR || a->buff[a->i] == '\n')
 		return (char_token(a));
 	else
 	{
