@@ -19,6 +19,7 @@
 
 const t_op	g_tab[INSTR_NUM + 1] =
 {
+	{"", 0, 0, {0, 0, 0}, 0, 0},
 	{"live", 0, 1, {T_DIR, 0, 0}, DIR_SIZE, 10},
 	{"ld", 1, 2, {T_DIR | T_IND, T_REG, 0}, DIR_SIZE, 5},
 	{"st", 1, 2, {T_REG, T_REG | T_IND, 0}, DIR_SIZE, 5},
@@ -38,6 +39,6 @@ const t_op	g_tab[INSTR_NUM + 1] =
 	{"lldi", 1, 3, {T_REG | T_DIR | T_IND, T_REG | T_DIR, T_REG}, IND_SIZE,
 		50},
 	{"lfork", 0, 1, {T_DIR, 0, 0}, IND_SIZE, 1000},
-	{"aff", 1, 1, {T_REG, 0, 0}, DIR_SIZE, 2},
-	{"", 0, 0, {0, 0, 0}, 0, 0}
+	{"aff", 1, 1, {T_REG, 0, 0}, DIR_SIZE, 2}
+	
 };

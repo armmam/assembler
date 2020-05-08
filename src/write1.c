@@ -59,10 +59,11 @@ static void	create_file(t_asm *a, int ac, char **av)
 			break ;
 		}
 	if (!(new_filename = ac == 3 ?
-	ft_strjoin(filename, ".s") : ft_strjoin(filename, ".corr")))
+	ft_strjoin(filename, ".s") : ft_strjoin(filename, ".cor")))
 		sys_error(NULL);
-	if ((a->fd = open(new_filename, O_WRONLY | O_CREAT, 0644)) < 0)
+	if ((a->fd = open(new_filename, O_WRONLY | O_CREAT | O_TRUNC, 0644)) < 0)
 		sys_error(new_filename);
+	ft_printf("Writing output program to %s\n", new_filename);
 	ft_memdel((void**)&new_filename);
 }
 

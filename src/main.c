@@ -9,7 +9,7 @@ int		main(int ac, char **av)
 	check_invariants();
 	input(&a, ac, av);
 	output(&a, ac, av);
-	ft_printf("successful\n");
+	//ft_printf("successful\n");
 	exit(EXIT_SUCCESS);
 	return (0);
 }

@@ -23,11 +23,11 @@ static void	input_instruction(t_asm *a)
 	int			i;
 	int			j;
 
-	i = 0;
-	while (i < INSTR_NUM &&
+	i = 1;
+	while (i <= INSTR_NUM &&
 	!ft_strnequ(&a->buff[a->i], g_tab[i].name, a->j - a->i))
 		++i;
-	if (i == INSTR_NUM)
+	if (i > INSTR_NUM)
 		error3("Invalid instruction", a);
 	++a->byte_i;
 	if (g_tab[i].typebyte)

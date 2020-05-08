@@ -40,7 +40,7 @@ static void	write_args(t_asm *a, t_op op, int *byte_i)
 		else if (a->token == INDIRECT_LABEL &&
 		(typebyte |= IND_CODE << (6 - 2 * j)))
 			write_ind_label(a);
-		byte_i += arg_size(a, &op);
+		*byte_i += arg_size(a, &op);
 		++j;
 	}
 	write_typebyte(a->fd, op, byte_i, typebyte);
@@ -52,12 +52,12 @@ static void	write_args(t_asm *a, t_op op, int *byte_i)
 
 static void	write_instr(t_asm *a)
 {
-	int			i;
+	t_byte		i;
 	int			byte_i;
 
-	i = 0;
+	i = 1;
 	byte_i = 0;
-	while (i < INSTR_NUM &&
+	while (i <= INSTR_NUM &&
 	!ft_strnequ(&a->buff[a->i], g_tab[i].name, a->j - a->i))
 		++i;
 	write(a->fd, (t_byte*)&i, sizeof(t_byte));
@@ -77,9 +77,6 @@ static void	write_instr(t_asm *a)
 
 void		write_bytecode_body(t_asm *a)
 {
-	while (tokenize(a) == COMMAND_NAME || a->token == COMMAND_COMMENT)
-	{
-	}
 	while (tokenize(a) != END)
 	{
 		if (a->token == LABEL)

@@ -22,7 +22,7 @@ void		write_ind(t_asm *a)
 {
 	short	ind;
 
-	ind = antoi(&a->buff[a->i + 1], a->j - a->i - 1);
+	ind = antoi(&a->buff[a->i], a->j - a->i);
 	write_bytes(a->fd, (t_byte*)&ind, IND_SIZE);
 }
 
