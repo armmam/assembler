@@ -22,6 +22,7 @@
 # define END				4096
 
 # define HASH_SIZE			67
+# define CODE_BITMASK		3
 
 typedef unsigned char		t_byte;
 
@@ -115,6 +116,12 @@ void					asm_write_ind_label(t_asm *a);
 void					asm_write_dirsize_bytes(int fd, int dir, int dirsize);
 void					asm_write_typebyte(int fd, t_op op, int *byte_i,
 						t_byte typebyte);
+
+void					disasm_write_header(t_asm *a);
+void					disasm_write_body(t_asm *a);
+void					disasm_write_reg(t_asm *a);
+void					disasm_write_dir(t_asm *a);
+void					disasm_write_ind(t_asm *a);
 
 t_label					*ht_search(t_asm *a);
 void					ht_insert(t_asm *a);

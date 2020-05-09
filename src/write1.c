@@ -28,7 +28,8 @@ void		byte_swap(t_byte *bytes, int size)
 
 static void	disasm_write(t_asm *a)
 {
-	(void)a;
+	disasm_write_header(a);
+	disasm_write_body(a);
 }
 
 /*
