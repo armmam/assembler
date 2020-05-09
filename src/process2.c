@@ -54,7 +54,7 @@ static void	input_instruction(t_asm *a)
 ** table.
 */
 
-void		input_body(t_asm *a)
+void		input_asm_body(t_asm *a)
 {
 	while (tokenize(a) != END)
 	{

@@ -85,8 +85,8 @@ void					usage(void);
 void					check_invariants(void);
 
 void					input(t_asm *a, int ac, char **av);
-void					input_header(t_asm *a);
-void					input_body(t_asm *a);
+void					input_asm_header(t_asm *a);
+void					input_asm_body(t_asm *a);
 void					input_labels(t_asm *a);
 int						arg_size(t_asm *a, const t_op *op);
 
@@ -102,9 +102,9 @@ unsigned				char_token(t_asm *a);
 
 void					reset_indices(t_asm *a);
 void					output(t_asm *a, int ac, char **av);
-void					write_bytes(int fd, t_byte *bytes, int size);
-void					write_bytecode_header(t_asm *a);
-void					write_bytecode_body(t_asm *a);
+void					byte_swap(t_byte *bytes, int size);
+void					write_asm_header(t_asm *a);
+void					write_asm_body(t_asm *a);
 void					write_reg(t_asm *a);
 void					write_dir(t_asm *a, int dirsize);
 void					write_ind(t_asm *a);

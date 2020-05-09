@@ -7,21 +7,26 @@
 ** Write multibyte data into a file using big-endian ordering
 */
 
-void		write_bytes(int fd, t_byte *bytes, int size)
+void		byte_swap(t_byte *bytes, int size)
 {
 	int		i;
+	t_byte	c;
 
 	i = 0;
-	bytes += size - 1;
-	while (i++ < size)
+	while (i < (int)size / 2)
 	{
-		write(fd, bytes, 1);
-		if (i != size)
-			--bytes;
+		c = bytes[i];
+		bytes[i] = bytes[size - 1 - i];
+		bytes[size - 1 - i] = c;
+		++i;
 	}
 }
 
-static void	write_asm(t_asm *a)
+/*
+** Write contents of a file containing bytecode as asm instructions into .s file
+*/
+
+static void	write_disasm(t_asm *a)
 {
 	(void)a;
 }
@@ -30,11 +35,11 @@ static void	write_asm(t_asm *a)
 ** Write contents of .s file as bytes into .cor file
 */
 
-static void	write_bytecode(t_asm *a)
+static void	write_asm(t_asm *a)
 {
 	reset_indices(a);
-	write_bytecode_header(a);
-	write_bytecode_body(a);
+	write_asm_header(a);
+	write_asm_body(a);
 }
 
 /*
@@ -76,8 +81,8 @@ void		output(t_asm *a, int ac, char **av)
 {
 	create_file(a, ac, av);
 	if (ac == 3)
-		write_asm(a);
+		write_disasm(a);
 	else
-		write_bytecode(a);
+		write_asm(a);
 	close(a->fd);
 }

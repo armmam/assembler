@@ -23,7 +23,8 @@ void		write_ind(t_asm *a)
 	short	ind;
 
 	ind = antoi(&a->buff[a->i], a->j - a->i);
-	write_bytes(a->fd, (t_byte*)&ind, IND_SIZE);
+	byte_swap((t_byte*)&ind, IND_SIZE);
+	write(a->fd, (t_byte*)&ind, IND_SIZE);
 }
 
 void		write_dir_label(t_asm *a, int dirsize)
@@ -43,5 +44,6 @@ void		write_ind_label(t_asm *a)
 
 	label = ht_search(a);
 	ind = label->byte_i - a->byte_i;
-	write_bytes(a->fd, (t_byte*)&ind, IND_SIZE);
+	byte_swap((t_byte*)&ind, IND_SIZE);
+	write(a->fd, (t_byte*)&ind, IND_SIZE);
 }

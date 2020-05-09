@@ -7,12 +7,14 @@
 ** of .s file as bytes into .cor file.
 */
 
-void		write_bytecode_header(t_asm *a)
+void		write_asm_header(t_asm *a)
 {
-	write_bytes(a->fd, (t_byte*)&a->header.magic, sizeof(unsigned));
+	byte_swap((t_byte*)&a->header.magic, sizeof(unsigned));
+	byte_swap((t_byte*)&a->header.prog_size, sizeof(unsigned));
+	write(a->fd, (t_byte*)&a->header.magic, sizeof(unsigned));
 	write(a->fd, &a->header.prog_name, PROG_NAME_LENGTH);
 	write(a->fd, "\0\0\0\0", 4);
-	write_bytes(a->fd, (t_byte*)&a->header.prog_size, sizeof(unsigned));
+	write(a->fd, (t_byte*)&a->header.prog_size, sizeof(unsigned));
 	write(a->fd, &a->header.comment, COMMENT_LENGTH);
 	write(a->fd, "\0\0\0\0", 4);
 }
@@ -75,7 +77,7 @@ static void	write_instr(t_asm *a)
 ** Write instructions and their arguments as bytes into .cor file.
 */
 
-void		write_bytecode_body(t_asm *a)
+void		write_asm_body(t_asm *a)
 {
 	while (tokenize(a) != END)
 	{

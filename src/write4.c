@@ -22,10 +22,12 @@ void	write_dirsize_bytes(int fd, int dir, int dirsize)
 	short	ind;
 
 	ind = dir;
+	byte_swap((t_byte*)&dir, DIR_SIZE);
+	byte_swap((t_byte*)&ind, IND_SIZE);
 	if (dirsize == DIR_SIZE)
-		write_bytes(fd, (t_byte*)&dir, dirsize);
+		write(fd, (t_byte*)&dir, dirsize);
 	else
-		write_bytes(fd, (t_byte*)&ind, dirsize);
+		write(fd, (t_byte*)&ind, dirsize);
 }
 
 void	write_typebyte(int fd, t_op op, int *byte_i, t_byte typebyte)

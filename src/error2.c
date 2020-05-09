@@ -29,7 +29,7 @@ void	sys_error(char *s)
 
 void	usage(void)
 {
-	ft_printf("Usage: ./asm [-d] <champion.s>\n"
+	ft_printf("Usage: ./asm [-d] <file>\n"
 	"\t-d\t: Disassembler mode\n");
 	exit(EXIT_SUCCESS);
 }
