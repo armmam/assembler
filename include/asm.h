@@ -4,7 +4,7 @@
 
 # define BUFF_SIZE 			32767
 
-# define INSTR_NUM	16
+# define INSTR_NUM			16
 # define REG_NUM_SIZE		1
 
 # define REGISTER			1
@@ -61,6 +61,7 @@ typedef struct			s_asm {
 	t_header			header;
 	unsigned			header_flag;
 	t_label				*ht[HASH_SIZE];
+	t_byte				code[CHAMP_MAX_SIZE + 1];
 	int					fd;
 
 }						t_asm;
@@ -103,16 +104,16 @@ unsigned				char_token(t_asm *a);
 void					reset_indices(t_asm *a);
 void					output(t_asm *a, int ac, char **av);
 void					byte_swap(t_byte *bytes, int size);
-void					write_asm_header(t_asm *a);
-void					write_asm_body(t_asm *a);
-void					write_reg(t_asm *a);
-void					write_dir(t_asm *a, int dirsize);
-void					write_ind(t_asm *a);
-void					write_dir_label(t_asm *a, int dirsize);
-void					write_ind_label(t_asm *a);
 int						antoi(char *nptr, int n);
-void					write_dirsize_bytes(int fd, int dir, int dirsize);
-void					write_typebyte(int fd, t_op op, int *byte_i,
+void					asm_write_header(t_asm *a);
+void					asm_write_body(t_asm *a);
+void					asm_write_reg(t_asm *a);
+void					asm_write_dir(t_asm *a, int dirsize);
+void					asm_write_ind(t_asm *a);
+void					asm_write_dir_label(t_asm *a, int dirsize);
+void					asm_write_ind_label(t_asm *a);
+void					asm_write_dirsize_bytes(int fd, int dir, int dirsize);
+void					asm_write_typebyte(int fd, t_op op, int *byte_i,
 						t_byte typebyte);
 
 t_label					*ht_search(t_asm *a);

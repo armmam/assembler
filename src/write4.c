@@ -17,7 +17,7 @@ int		antoi(char *nptr, int n)
 	return (res);
 }
 
-void	write_dirsize_bytes(int fd, int dir, int dirsize)
+void	asm_write_dirsize_bytes(int fd, int dir, int dirsize)
 {
 	short	ind;
 
@@ -30,7 +30,7 @@ void	write_dirsize_bytes(int fd, int dir, int dirsize)
 		write(fd, (t_byte*)&ind, dirsize);
 }
 
-void	write_typebyte(int fd, t_op op, int *byte_i, t_byte typebyte)
+void	asm_write_typebyte(int fd, t_op op, int *byte_i, t_byte typebyte)
 {
 	if (op.typebyte)
 	{

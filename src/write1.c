@@ -26,7 +26,7 @@ void		byte_swap(t_byte *bytes, int size)
 ** Write contents of a file containing bytecode as asm instructions into .s file
 */
 
-static void	write_disasm(t_asm *a)
+static void	disasm_write(t_asm *a)
 {
 	(void)a;
 }
@@ -35,11 +35,11 @@ static void	write_disasm(t_asm *a)
 ** Write contents of .s file as bytes into .cor file
 */
 
-static void	write_asm(t_asm *a)
+static void	asm_write(t_asm *a)
 {
 	reset_indices(a);
-	write_asm_header(a);
-	write_asm_body(a);
+	asm_write_header(a);
+	asm_write_body(a);
 }
 
 /*
@@ -80,9 +80,9 @@ static void	create_file(t_asm *a, int ac, char **av)
 void		output(t_asm *a, int ac, char **av)
 {
 	create_file(a, ac, av);
-	if (ac == 3)
-		write_disasm(a);
+	if (ac == 2)
+		asm_write(a);
 	else
-		write_asm(a);
+		disasm_write(a);
 	close(a->fd);
 }

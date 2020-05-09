@@ -7,7 +7,7 @@
 ** of .s file as bytes into .cor file.
 */
 
-void		write_asm_header(t_asm *a)
+void		asm_write_header(t_asm *a)
 {
 	byte_swap((t_byte*)&a->header.magic, sizeof(unsigned));
 	byte_swap((t_byte*)&a->header.prog_size, sizeof(unsigned));
@@ -19,7 +19,7 @@ void		write_asm_header(t_asm *a)
 	write(a->fd, "\0\0\0\0", 4);
 }
 
-static void	write_args(t_asm *a, t_op op, int *byte_i)
+static void	asm_write_args(t_asm *a, t_op op, int *byte_i)
 {
 	int			j;
 	t_byte		typebyte;
@@ -31,28 +31,28 @@ static void	write_args(t_asm *a, t_op op, int *byte_i)
 		if (j != 0)
 			tokenize(a);
 		if (tokenize(a) == REGISTER && (typebyte |= REG_CODE << (6 - 2 * j)))
-			write_reg(a);
+			asm_write_reg(a);
 		else if (a->token == DIRECT && (typebyte |= DIR_CODE << (6 - 2 * j)))
-			write_dir(a, op.dirsize);
+			asm_write_dir(a, op.dirsize);
 		else if (a->token == INDIRECT && (typebyte |= IND_CODE << (6 - 2 * j)))
-			write_ind(a);
+			asm_write_ind(a);
 		else if (a->token == DIRECT_LABEL &&
 		(typebyte |= DIR_CODE << (6 - 2 * j)))
-			write_dir_label(a, op.dirsize);
+			asm_write_dir_label(a, op.dirsize);
 		else if (a->token == INDIRECT_LABEL &&
 		(typebyte |= IND_CODE << (6 - 2 * j)))
-			write_ind_label(a);
+			asm_write_ind_label(a);
 		*byte_i += arg_size(a, &op);
 		++j;
 	}
-	write_typebyte(a->fd, op, byte_i, typebyte);
+	asm_write_typebyte(a->fd, op, byte_i, typebyte);
 }
 
 /*
 ** IS write(a->fd, (t_byte)i, sizeof(t_byte)); READ CORRECTLY?
 */
 
-static void	write_instr(t_asm *a)
+static void	asm_write_instr(t_asm *a)
 {
 	t_byte		i;
 	int			byte_i;
@@ -69,7 +69,7 @@ static void	write_instr(t_asm *a)
 		write(a->fd, "\0", sizeof(t_byte));
 		++byte_i;
 	}
-	write_args(a, g_tab[i], &byte_i);
+	asm_write_args(a, g_tab[i], &byte_i);
 	a->byte_i += byte_i;
 }
 
@@ -77,7 +77,7 @@ static void	write_instr(t_asm *a)
 ** Write instructions and their arguments as bytes into .cor file.
 */
 
-void		write_asm_body(t_asm *a)
+void		asm_write_body(t_asm *a)
 {
 	while (tokenize(a) != END)
 	{
@@ -85,7 +85,7 @@ void		write_asm_body(t_asm *a)
 			tokenize(a);
 		if (a->token == INSTRUCTION)
 		{
-			write_instr(a);
+			asm_write_instr(a);
 			tokenize(a);
 		}
 	}
