@@ -21,18 +21,13 @@
 
 void		error(char *s)
 {
-	write(STDERR_FILENO, "Error: ", 7);
-	write(STDERR_FILENO, s, ft_strlen(s));
-	write(STDERR_FILENO, "\n", 1);
+	ft_dprintf(STDERR_FILENO, "Error: %s\n", s);
 	exit(EXIT_FAILURE);
 }
 
 void		error2(char *s, char *t)
 {
-	write(STDERR_FILENO, "Error: ", 7);
-	write(STDERR_FILENO, s, ft_strlen(s));
-	write(STDERR_FILENO, t, ft_strlen(t));
-	write(STDERR_FILENO, "\n", 1);
+	ft_dprintf(STDERR_FILENO, "Error: %s%s\n", s, t);
 	exit(EXIT_FAILURE);
 }
 
@@ -77,12 +72,7 @@ static void	next_newline(t_asm *a)
 void		error3(char *s, t_asm *a)
 {
 	next_newline(a);
-	write(STDERR_FILENO, "Error: ", 7);
-	write(STDERR_FILENO, s, ft_strlen(s));
-	write(STDERR_FILENO, " at line ", 9);
-	ft_putnbr_fd(a->nl + 1, STDERR_FILENO);
-	write(STDERR_FILENO, "\n\t\"", 3);
-	write(STDERR_FILENO, &a->buff[a->nl_i], ft_strlen(&a->buff[a->nl_i]));
-	write(STDERR_FILENO, "\"\n", 2);
+	ft_dprintf(STDERR_FILENO, "Error: %s at line %i\n\t\"%s\"\n",
+	s, a->nl + 1, &a->buff[a->nl_i]);
 	exit(EXIT_FAILURE);
 }
