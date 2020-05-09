@@ -106,6 +106,7 @@ void					reset_indices(t_asm *a);
 void					output(t_asm *a, int ac, char **av);
 void					byte_swap(t_byte *bytes, int size);
 int						antoi(char *nptr, int n);
+int						bntoi(t_byte *byte, int n);
 void					asm_write_header(t_asm *a);
 void					asm_write_body(t_asm *a);
 void					asm_write_reg(t_asm *a);
@@ -122,6 +123,7 @@ void					disasm_write_body(t_asm *a);
 void					disasm_write_reg(t_asm *a);
 void					disasm_write_dir(t_asm *a);
 void					disasm_write_ind(t_asm *a);
+void					disasm_check_eof(t_asm *a);
 
 t_label					*ht_search(t_asm *a);
 void					ht_insert(t_asm *a);

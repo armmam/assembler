@@ -17,6 +17,22 @@ int		antoi(char *nptr, int n)
 	return (res);
 }
 
+int		bntoi(t_byte *byte, int n)
+{
+	int		mult;
+	int		res;
+
+	res = 0;
+	mult = 1;
+	while (n-- > 0)
+	{
+		res += *byte * mult;
+		mult <<= 8;
+		++byte;
+	}
+	return (res);
+}
+
 void	asm_write_dirsize_bytes(int fd, int dir, int dirsize)
 {
 	short	ind;

@@ -48,10 +48,6 @@ static void	asm_write_args(t_asm *a, t_op op, int *byte_i)
 	asm_write_typebyte(a->fd, op, byte_i, typebyte);
 }
 
-/*
-** IS write(a->fd, (t_byte)i, sizeof(t_byte)); READ CORRECTLY?
-*/
-
 static void	asm_write_instr(t_asm *a)
 {
 	t_byte		i;

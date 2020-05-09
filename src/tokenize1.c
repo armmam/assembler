@@ -2,7 +2,7 @@
 #include "libft.h"
 
 /*
-** Set nl_i and nl to refer to the new \n encountered
+** Set nl_i and nl to refer to the new \n encountered.
 */
 
 unsigned		endl(t_asm *a)

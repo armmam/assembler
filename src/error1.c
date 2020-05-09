@@ -72,7 +72,7 @@ static void	next_newline(t_asm *a)
 void		error3(char *s, t_asm *a)
 {
 	next_newline(a);
-	ft_dprintf(STDERR_FILENO, "Error: %s at line %i\n\t\"%s\"\n",
+	ft_dprintf(STDERR_FILENO, "Error: %s at line %d\n\t\"%s\"\n",
 	s, a->nl + 1, &a->buff[a->nl_i]);
 	exit(EXIT_FAILURE);
 }
