@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   input.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: brika <brika@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/05/10 17:37:21 by brika             #+#    #+#             */
+/*   Updated: 2020/05/10 17:44:34 by brika            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <fcntl.h>
 #include <unistd.h>
 #include "asm.h"
@@ -49,7 +61,6 @@ static void	input_asm(t_asm *a, int fd, char *filename)
 		error2(filename, " is too large.");
 	else
 		sys_error(filename);
-
 }
 
 /*

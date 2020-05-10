@@ -1,8 +1,20 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   tokenize1.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: brika <brika@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/05/10 17:37:52 by brika             #+#    #+#             */
+/*   Updated: 2020/05/10 17:59:13 by brika            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "asm.h"
 #include "libft.h"
 
 /*
-** Set nl_i and nl to refer to the new \n encountered.
+** Set nl_i and nl to refer to the new encountered \n.
 */
 
 unsigned		endl(t_asm *a)
@@ -22,8 +34,8 @@ static void		skip_spaces(t_asm *a)
 /*
 ** Recognize the next token, set buffer indices a->i and a->j to the
 ** beginning and the end of the token and return the token flag. If the token
-** has unallowed chars in it, output corresponding error message and terminate
-** the program.
+** has unallowed chars in it, output the corresponding error message and
+** terminate the program.
 */
 
 unsigned		tokenize(t_asm *a)

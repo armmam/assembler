@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   tokenize2.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: brika <brika@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/05/10 17:37:58 by brika             #+#    #+#             */
+/*   Updated: 2020/05/10 17:59:48 by brika            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "asm.h"
 #include "libft.h"
 
@@ -99,11 +111,6 @@ static unsigned	instruction(t_asm *a)
 /*
 ** Try to process the token as INSTRUCTION, LABEL, REGISTER or INDIRECT. Exit
 ** with error if failed.
-**
-** ends with : => LABEL
-** between 2 and 3 chars, the 1st one r, the rest nums, not r0/r00 => REGISTER
-** all valid numbers (the first char may be -) => INDIRECT
-** else (combination of chars and numbers, no '-' allowed) => INSTRUCTION
 */
 
 unsigned		text(t_asm *a)

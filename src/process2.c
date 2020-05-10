@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   process2.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: brika <brika@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/05/10 17:37:35 by brika             #+#    #+#             */
+/*   Updated: 2020/05/10 17:55:38 by brika            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "asm.h"
 #include "libft.h"
 
@@ -12,7 +24,7 @@ int			arg_size(t_asm *a, const t_op *op)
 }
 
 /*
-** Check that INSTRUCTION has valid number of arguments, valid argument syntax
+** Check that INSTRUCTION has a valid number of arguments, valid argument syntax
 ** and no other instructions on the same line.
 */
 
@@ -50,7 +62,7 @@ static void	input_instruction(t_asm *a)
 ** INSTRUCTION per line (each of which is also whether at the beginning of a
 ** line or right after LABEL), each one is followed with a valid number and
 ** types of arguments, all separated from each other with SEPARATOR_CHAR.
-** Record each LABEL name and the number of a byte it points to in a hash
+** Record each LABEL name and the number of a byte it points to into a hash
 ** table.
 */
 
@@ -88,8 +100,8 @@ void		reset_indices(t_asm *a)
 }
 
 /*
-** Check that each label in DIRECT_LABEL and INDIRECT_LABEL has corresponding
-** LABEL somewhere in the file
+** Check that each label in DIRECT_LABEL and INDIRECT_LABEL has a corresponding
+** LABEL somewhere in the file.
 */
 
 void		input_labels(t_asm *a)

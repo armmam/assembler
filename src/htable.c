@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   htable.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: brika <brika@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/05/10 17:37:46 by brika             #+#    #+#             */
+/*   Updated: 2020/05/10 17:58:05 by brika            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "asm.h"
 #include "libft.h"
 
@@ -63,6 +75,10 @@ void			ht_insert(t_asm *a)
 		a->ht[hash(&a->buff[label->i], label->len)] = label;
 	}
 }
+
+/*
+** Free dynamic memory allocated for the each element of the hash table.
+*/
 
 void			ht_delete(t_asm *a)
 {

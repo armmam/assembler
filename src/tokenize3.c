@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   tokenize3.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: brika <brika@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/05/10 17:38:03 by brika             #+#    #+#             */
+/*   Updated: 2020/05/10 18:00:17 by brika            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "asm.h"
 #include "libft.h"
 
@@ -62,7 +74,8 @@ unsigned	indirect_label(t_asm *a)
 }
 
 /*
-** Try to process SEPARATOR, ENDLINE or comment. Exit with error if failed.
+** Try to process the token as SEPARATOR, ENDLINE or a comment. Exit with error
+** if failed.
 */
 
 unsigned	char_token(t_asm *a)

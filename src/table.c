@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   table.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sscarecr <sscarecr@student.42.fr>          +#+  +:+       +#+        */
+/*   By: brika <brika@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/05 16:30:45 by sscarecr          #+#    #+#             */
-/*   Updated: 2020/04/14 00:33:55 by sscarecr         ###   ########.fr       */
+/*   Updated: 2020/05/10 18:01:20 by brika            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include "asm.h"
 
 /*
-** Corewar operations reference table
+** Corewar operations reference table.
 */
 
 const t_op	g_tab[INSTR_NUM + 1] =

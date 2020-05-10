@@ -1,10 +1,22 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   write1.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: brika <brika@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/05/10 17:36:23 by brika             #+#    #+#             */
+/*   Updated: 2020/05/10 18:07:23 by brika            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "asm.h"
 #include "libft.h"
 #include <fcntl.h>
 #include <unistd.h>
 
 /*
-** Write multibyte data into a file using big-endian ordering
+** Swap bytes in multibyte data so that it changes its endianness
 */
 
 void		byte_swap(t_byte *bytes, int size)
@@ -45,9 +57,9 @@ static void	asm_write(t_asm *a)
 
 /*
 ** Try to create a file with the same filename as the old one but with .cor
-** instead of .s or, if failed, with .cor appended to the old filename. If
-** there already is a file with the new filename, overwrite it. Return file
-** descriptor of the new file.
+** (.s for disasm) instead of .s (.cor for disasm) or, if failed, with .cor
+** (.s for disasm) appended to the old filename. If there already is a file
+** with the new filename, overwrite it.
 */
 
 static void	create_file(t_asm *a, int ac, char **av)

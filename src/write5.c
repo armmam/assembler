@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   write5.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: brika <brika@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/05/10 17:37:10 by brika             #+#    #+#             */
+/*   Updated: 2020/05/10 17:52:29 by brika            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "asm.h"
 #include "libft.h"
 #include <unistd.h>
@@ -65,7 +77,7 @@ void		disasm_write_body(t_asm *a)
 ** Write program name and comment to .s file.
 */
 
-void	disasm_write_header(t_asm *a)
+void		disasm_write_header(t_asm *a)
 {
 	ft_dprintf(a->fd, "%s \"%s\"\n%s \"%s\"\n",
 	NAME_CMD_STRING, a->header.prog_name,
