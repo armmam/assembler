@@ -86,4 +86,5 @@ void		output(t_asm *a, int ac, char **av)
 	else
 		disasm_write(a);
 	close(a->fd);
+	ht_delete(a);
 }

@@ -63,3 +63,25 @@ void			ht_insert(t_asm *a)
 		a->ht[hash(&a->buff[label->i], label->len)] = label;
 	}
 }
+
+void			ht_delete(t_asm *a)
+{
+	int		i;
+	t_label	*label;
+	t_label	*label_prev;
+
+	i = 0;
+	while (i < HASH_SIZE)
+	{
+		if ((label = a->ht[i++]))
+		{
+			while (label->next)
+			{
+				label_prev = label;
+				label = label->next;
+				ft_memdel((void**)&label_prev);
+			}
+			ft_memdel((void**)&label);
+		}
+	}
+}

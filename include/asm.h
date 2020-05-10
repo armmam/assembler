@@ -133,5 +133,6 @@ void					disasm_check_eof(t_asm *a);
 
 t_label					*ht_search(t_asm *a);
 void					ht_insert(t_asm *a);
+void					ht_delete(t_asm *a);
 
 #endif
