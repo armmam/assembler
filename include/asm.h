@@ -2,7 +2,8 @@
 # define ASM_H
 # include "op.h"
 
-# define BUFF_SIZE 			32767
+# define ASM_BUFF_SIZE 		32767
+# define DISASM_BUFF_SIZE 	8191
 
 # define INSTR_NUM			16
 # define REG_NUM_SIZE		1
@@ -40,33 +41,6 @@ typedef struct			s_label {
 	struct s_label		*next;
 }						t_label;
 
-/*
-** i - index of the first char in current token
-** j - index of the last char in current token
-** nl -- number of the last \n in buff encountered
-** nl_i -- index of the last \n in buff encountered
-** byte_i -- number of the byte of the token pointed to by i in the output file
-** (excluding file head info -- magic header, command name, command exec code
-** size, command comment and nulls)
-** last_token -- the latest (last) recognized token: used in error3 functon
-*/
-
-typedef struct			s_asm {
-	char				buff[BUFF_SIZE + 1];
-	int					i;
-	int					j;
-	int					nl;
-	int					nl_i;
-	int					byte_i;
-	unsigned			token;
-	t_header			header;
-	unsigned			header_flag;
-	t_label				*ht[HASH_SIZE];
-	t_byte				code[CHAMP_MAX_SIZE + 1];
-	int					fd;
-
-}						t_asm;
-
 typedef struct			s_op
 {
 	char				name[5];
@@ -76,6 +50,38 @@ typedef struct			s_op
 	int					dirsize;
 	int					lag;
 }						t_op;
+
+/*
+** i - index of the first char in current token
+** j - index of the last char in current token
+** nl -- number of the last \n in buff encountered
+** nl_i -- index of the last \n in buff encountered
+** byte_i -- number of the byte of the token pointed to by i in the output file
+** (excluding file head info -- magic header, command name, command exec code
+** size, command comment and nulls)
+** token -- the latest (last) recognized token: used in error3 functon
+** header_flag -- flag for making sure that name/comment are only read once
+** ht -- hash table for storing all encountered labels
+** code -- buffer for storing all bytes of bytecode file (disasm)
+** op -- info of the instruction currently being outputed to .s file (disasm)
+*/
+
+typedef struct			s_asm {
+	char				buff[ASM_BUFF_SIZE + 1];
+	int					i;
+	int					j;
+	int					nl;
+	int					nl_i;
+	int					byte_i;
+	unsigned			token;
+	t_header			header;
+	unsigned			header_flag;
+	t_label				*ht[HASH_SIZE];
+	t_byte				code[DISASM_BUFF_SIZE + 1];
+	t_op				op;
+	int					fd;
+
+}						t_asm;
 
 extern const t_op		g_tab[];
 

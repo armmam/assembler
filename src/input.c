@@ -19,7 +19,7 @@ static void	input_disasm(t_asm *a, int fd, char *filename)
 	byte_swap((t_byte*)&a->header.prog_size, sizeof(a->header.prog_size));
 	if (r < (int)sizeof(t_header) || a->header.magic != COREWAR_EXEC_MAGIC)
 		error2(filename, " has an invalid header.");
-	if (a->header.prog_size > CHAMP_MAX_SIZE)
+	if (a->header.prog_size > DISASM_BUFF_SIZE)
 		error2(filename, " is too large.");
 	if ((r = read(fd, a->code, a->header.prog_size + 1)) !=
 	(int)a->header.prog_size)
@@ -36,7 +36,7 @@ static void	input_asm(t_asm *a, int fd, char *filename)
 {
 	int		r;
 
-	if ((r = read(fd, a->buff, BUFF_SIZE)) > 0 &&
+	if ((r = read(fd, a->buff, ASM_BUFF_SIZE)) > 0 &&
 	(r = read(fd, a->buff, 1)) == 0)
 	{
 		input_asm_header(a);
