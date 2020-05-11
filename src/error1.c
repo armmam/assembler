@@ -6,7 +6,7 @@
 /*   By: brika <brika@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/28 23:32:18 by sscarecr          #+#    #+#             */
-/*   Updated: 2020/05/10 18:01:15 by brika            ###   ########.fr       */
+/*   Updated: 2020/05/11 17:35:29 by brika            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,9 +64,6 @@ static void	next_newline(t_asm *a)
 /*
 ** Include line number where the error occured with its contents into error
 ** message.
-**
-** Fix: print a single line instead of the rest of the file (replace the next
-** \n with \0)
 */
 
 void		error3(char *s, t_asm *a)
