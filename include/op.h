@@ -1,20 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   op.h                                               :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: brika <brika@student.42.fr>                +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2013/10/04 11:33:27 by zaz               #+#    #+#             */
-/*   Updated: 2020/05/10 17:43:36 by brika            ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
-/*
-** Toutes les tailles sont en octets.
-** On part du principe qu'un int fait 32 bits. Est-ce vrai chez vous ?
-*/
-
 #ifndef OP_H
 # define OP_H
 
@@ -25,15 +8,6 @@
 # define REG_CODE				1
 # define DIR_CODE				2
 # define IND_CODE				3
-
-/*
-** Zaz's op.h is changed to fit new norminette restrictions. Original lines:
-** # define MEM_SIZE			(4*1024)
-** # define IDX_MOD				(MEM_SIZE / 8)
-** # define CHAMP_MAX_SIZE		(MEM_SIZE / 6)
-** Therefore it is necessary to manually adjust IDX_MOD and CHAMP_MAX_SIZE
-** if MEM_SIZE value is to be changed.
-*/
 
 # define MAX_ARGS_NUMBER		4
 # define MAX_PLAYERS			4
@@ -70,7 +44,7 @@ typedef char	t_arg_type;
 # define T_LAB					8
 
 /*
-** Champion restrictions
+** Program restrictions
 */
 
 # define PROG_NAME_LENGTH		128

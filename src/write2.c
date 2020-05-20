@@ -1,18 +1,6 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   write2.c                                           :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: brika <brika@student.42.fr>                +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/05/10 17:36:54 by brika             #+#    #+#             */
-/*   Updated: 2020/05/10 17:51:12 by brika            ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
+#include <unistd.h>
 #include "asm.h"
 #include "libft.h"
-#include <unistd.h>
 
 /*
 ** Write magic header, program name, program exec code size and program comment
@@ -68,7 +56,7 @@ static void	asm_write_instr(t_asm *a)
 	i = 1;
 	byte_i = 0;
 	while (i <= INSTR_NUM &&
-	!ft_strnequ(&a->buff[a->i], g_tab[i].name, a->j - a->i))
+	!strnequ(&a->buff[a->i], g_tab[i].name, a->j - a->i))
 		++i;
 	write(a->fd, (t_byte*)&i, sizeof(t_byte));
 	++byte_i;

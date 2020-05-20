@@ -1,33 +1,22 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   error1.c                                           :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: brika <brika@student.42.fr>                +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/11/28 23:32:18 by sscarecr          #+#    #+#             */
-/*   Updated: 2020/05/11 17:35:29 by brika            ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <unistd.h>
+#include "asm.h"
 
 /*
 ** Non-system error messages.
 */
 
-#include <stdio.h>
-#include <unistd.h>
-#include "asm.h"
-#include "libft.h"
-
 void		error(char *s)
 {
-	ft_dprintf(STDERR_FILENO, "Error: %s\n", s);
+	dprintf(STDERR_FILENO, "Error: %s\n", s);
 	exit(EXIT_FAILURE);
 }
 
 void		error2(char *s, char *t)
 {
-	ft_dprintf(STDERR_FILENO, "Error: %s%s\n", s, t);
+	dprintf(STDERR_FILENO, "Error: %s%s\n", s, t);
 	exit(EXIT_FAILURE);
 }
 
@@ -69,7 +58,7 @@ static void	next_newline(t_asm *a)
 void		error3(char *s, t_asm *a)
 {
 	next_newline(a);
-	ft_dprintf(STDERR_FILENO, "Error: %s at line %d\n\t\"%s\"\n",
+	dprintf(STDERR_FILENO, "Error: %s at line %d\n\t\"%s\"\n",
 	s, a->nl + 1, &a->buff[a->nl_i]);
 	exit(EXIT_FAILURE);
 }

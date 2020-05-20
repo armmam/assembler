@@ -1,15 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   input.c                                            :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: brika <brika@student.42.fr>                +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/05/10 17:37:21 by brika             #+#    #+#             */
-/*   Updated: 2020/05/10 17:44:34 by brika            ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include <fcntl.h>
 #include <unistd.h>
 #include "asm.h"
@@ -79,7 +67,7 @@ void		input(t_asm *a, int ac, char **av)
 	r = 0;
 	fd = 0;
 	if ((ac == 2 && (fd = open(av[1], O_RDONLY)) >= 0) || (ac == 3 &&
-	ft_strequ(av[1], "-d") && (fd = open(av[2], O_RDONLY)) >= 0))
+	strequ(av[1], "-d") && (fd = open(av[2], O_RDONLY)) >= 0))
 	{
 		if (ac == 2)
 			input_asm(a, fd, av[1]);

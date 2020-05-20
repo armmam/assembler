@@ -1,15 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   process2.c                                         :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: brika <brika@student.42.fr>                +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/05/10 17:37:35 by brika             #+#    #+#             */
-/*   Updated: 2020/05/10 17:55:38 by brika            ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "asm.h"
 #include "libft.h"
 
@@ -35,7 +23,7 @@ static void	input_instruction(t_asm *a)
 
 	i = 1;
 	while (i <= INSTR_NUM &&
-	!ft_strnequ(&a->buff[a->i], g_tab[i].name, a->j - a->i))
+	!strnequ(&a->buff[a->i], g_tab[i].name, a->j - a->i))
 		++i;
 	if (i > INSTR_NUM)
 		error3("Invalid instruction", a);

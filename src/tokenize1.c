@@ -1,17 +1,6 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   tokenize1.c                                        :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: brika <brika@student.42.fr>                +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/05/10 17:37:52 by brika             #+#    #+#             */
-/*   Updated: 2020/05/10 17:59:13 by brika            ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
+#include <string.h>
+#include <ctype.h>
 #include "asm.h"
-#include "libft.h"
 
 /*
 ** Set nl_i and nl to refer to the new encountered \n.
@@ -47,8 +36,8 @@ unsigned		tokenize(t_asm *a)
 		return (header(a));
 	else if (a->buff[a->i] == '"')
 		return (string(a));
-	else if (ft_strchr(LABEL_CHARS, a->buff[a->i]) ||
-	(ft_isalnum(a->buff[a->i]) && ft_tolower(a->buff[a->i]) == a->buff[a->i]))
+	else if (strchr(LABEL_CHARS, a->buff[a->i]) ||
+	(isalnum(a->buff[a->i]) && tolower(a->buff[a->i]) == a->buff[a->i]))
 		return (text(a));
 	else if (a->buff[a->i] == '-')
 		return (neg_indirect(a));

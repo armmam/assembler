@@ -1,15 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   htable.c                                           :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: brika <brika@student.42.fr>                +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/05/10 17:37:46 by brika             #+#    #+#             */
-/*   Updated: 2020/05/10 17:58:05 by brika            ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "asm.h"
 #include "libft.h"
 
@@ -49,7 +37,7 @@ t_label			*ht_search(t_asm *a)
 	while (label)
 	{
 		if (len == label->len &&
-		ft_strnequ(&a->buff[i], &a->buff[label->i], label->len))
+		strnequ(&a->buff[i], &a->buff[label->i], label->len))
 			return (label);
 		label = label->next;
 	}
@@ -65,7 +53,7 @@ void			ht_insert(t_asm *a)
 {
 	t_label		*label;
 
-	if (!(label = (t_label*)ft_memalloc(sizeof(t_label))))
+	if (!(label = (t_label*)memalloc(sizeof(t_label))))
 		sys_error(NULL);
 	if (!ht_search(a))
 	{
@@ -95,9 +83,9 @@ void			ht_delete(t_asm *a)
 			{
 				label_prev = label;
 				label = label->next;
-				ft_memdel((void**)&label_prev);
+				memdel((void**)&label_prev);
 			}
-			ft_memdel((void**)&label);
+			memdel((void**)&label);
 		}
 	}
 }

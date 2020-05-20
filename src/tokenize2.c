@@ -1,15 +1,5 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   tokenize2.c                                        :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: brika <brika@student.42.fr>                +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/05/10 17:37:58 by brika             #+#    #+#             */
-/*   Updated: 2020/05/10 17:59:48 by brika            ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
+#include <string.h>
+#include <ctype.h>
 #include "asm.h"
 #include "libft.h"
 
@@ -21,16 +11,16 @@
 unsigned		header(t_asm *a)
 {
 	a->token = COMMAND_NAME;
-	if (ft_strnequ(&a->buff[a->i], NAME_CMD_STRING,
-	ft_strlen(NAME_CMD_STRING)))
+	if (strnequ(&a->buff[a->i], NAME_CMD_STRING,
+	strlen(NAME_CMD_STRING)))
 	{
-		a->j += ft_strlen(NAME_CMD_STRING);
+		a->j += strlen(NAME_CMD_STRING);
 		return (COMMAND_NAME);
 	}
-	else if (ft_strnequ(&a->buff[a->i], COMMENT_CMD_STRING,
-	ft_strlen(COMMENT_CMD_STRING)))
+	else if (strnequ(&a->buff[a->i], COMMENT_CMD_STRING,
+	strlen(COMMENT_CMD_STRING)))
 	{
-		a->j += ft_strlen(COMMENT_CMD_STRING);
+		a->j += strlen(COMMENT_CMD_STRING);
 		return (a->token = COMMAND_COMMENT);
 	}
 	else
@@ -73,20 +63,6 @@ unsigned		string(t_asm *a)
 	}
 }
 
-static int		ft_strnnum(const char *s, int num)
-{
-	if (!s)
-		return (0);
-	while (num && *s)
-	{
-		if (!ft_isdigit(*s))
-			return (0);
-		--num;
-		++s;
-	}
-	return (1);
-}
-
 /*
 ** Try to process the token as INSTRUCTION. Exit with error if failed.
 */
@@ -99,8 +75,8 @@ static unsigned	instruction(t_asm *a)
 	i = 1;
 	while (i <= INSTR_NUM)
 	{
-		if (ft_strnequ(&a->buff[a->i], g_tab[i].name,
-		ft_strlen(g_tab[i].name)))
+		if (strnequ(&a->buff[a->i], g_tab[i].name,
+		strlen(g_tab[i].name)))
 			return (INSTRUCTION);
 		++i;
 	}
@@ -115,20 +91,20 @@ static unsigned	instruction(t_asm *a)
 
 unsigned		text(t_asm *a)
 {
-	while (a->buff[a->j] != '\0' && ft_strchr(LABEL_CHARS, a->buff[a->j]))
+	while (a->buff[a->j] != '\0' && strchr(LABEL_CHARS, a->buff[a->j]))
 		++a->j;
 	if (a->buff[a->j] == LABEL_CHAR && ++a->j)
 		return (a->token = LABEL);
-	while (ft_isalnum(a->buff[a->j]) &&
-	ft_tolower(a->buff[a->j]) == a->buff[a->j])
+	while (isalnum(a->buff[a->j]) &&
+	tolower(a->buff[a->j]) == a->buff[a->j])
 		++a->j;
-	if (a->buff[a->i] == 'r' && ((a->j - a->i == (int)ft_strlen("r1") &&
-	!ft_strnequ(&a->buff[a->i], "r0", ft_strlen("r0")) &&
-	ft_isdigit(a->buff[a->j - 1])) || (a->j - a->i == (int)ft_strlen("r01") &&
-	ft_isdigit(a->buff[a->j - 1]) && ft_isdigit(a->buff[a->j - 2]) &&
-	!ft_strnequ(&a->buff[a->i], "r00", ft_strlen("r00")))))
+	if (a->buff[a->i] == 'r' && ((a->j - a->i == (int)strlen("r1") &&
+	!strnequ(&a->buff[a->i], "r0", strlen("r0")) &&
+	isdigit(a->buff[a->j - 1])) || (a->j - a->i == (int)strlen("r01") &&
+	isdigit(a->buff[a->j - 1]) && isdigit(a->buff[a->j - 2]) &&
+	!strnequ(&a->buff[a->i], "r00", strlen("r00")))))
 		return (a->token = REGISTER);
-	else if (ft_strnnum(&a->buff[a->i], a->j - a->i))
+	else if (strnnum(&a->buff[a->i], a->j - a->i))
 		return (a->token = INDIRECT);
 	else
 		return (instruction(a));

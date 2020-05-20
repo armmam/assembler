@@ -1,18 +1,6 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   write6.c                                           :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: brika <brika@student.42.fr>                +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/05/10 17:37:15 by brika             #+#    #+#             */
-/*   Updated: 2020/05/10 17:43:23 by brika            ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
-#include "asm.h"
-#include "libft.h"
 #include <unistd.h>
+#include <stdio.h>
+#include "asm.h"
 
 void		disasm_write_reg(t_asm *a)
 {
@@ -20,7 +8,7 @@ void		disasm_write_reg(t_asm *a)
 
 	disasm_check_eof(a);
 	reg = a->code[a->i++];
-	ft_dprintf(a->fd, "r%hd", reg);
+	dprintf(a->fd, "r%hd", reg);
 }
 
 void		disasm_write_dir(t_asm *a)
@@ -36,7 +24,7 @@ void		disasm_write_dir(t_asm *a)
 	{
 		byte_swap((t_byte*)&a->code[a->i], DIR_SIZE);
 		dir = bntoi((t_byte*)&a->code[a->i], DIR_SIZE);
-		ft_dprintf(a->fd, "%%%d", dir);
+		dprintf(a->fd, "%%%d", dir);
 		a->i += DIR_SIZE;
 	}
 	else if (a->op.dirsize == IND_SIZE &&
@@ -44,7 +32,7 @@ void		disasm_write_dir(t_asm *a)
 	{
 		byte_swap((t_byte*)&a->code[a->i], IND_SIZE);
 		ind = bntoi((t_byte*)&a->code[a->i], IND_SIZE);
-		ft_dprintf(a->fd, "%%%hd", ind);
+		dprintf(a->fd, "%%%hd", ind);
 		a->i += IND_SIZE;
 	}
 	else
@@ -60,7 +48,7 @@ void		disasm_write_ind(t_asm *a)
 	{
 		byte_swap((t_byte*)&a->code[a->i], IND_SIZE);
 		ind = bntoi((t_byte*)&a->code[a->i], IND_SIZE);
-		ft_dprintf(a->fd, "%hd", ind);
+		dprintf(a->fd, "%hd", ind);
 		a->i += IND_SIZE;
 	}
 	else

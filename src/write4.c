@@ -1,18 +1,6 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   write4.c                                           :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: brika <brika@student.42.fr>                +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/05/10 17:37:04 by brika             #+#    #+#             */
-/*   Updated: 2020/05/10 17:43:21 by brika            ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
-#include "asm.h"
-#include "libft.h"
 #include <unistd.h>
+#include <stdlib.h>
+#include "asm.h"
 
 int		antoi(char *nptr, int n)
 {
@@ -23,7 +11,7 @@ int		antoi(char *nptr, int n)
 	end = *nptr;
 	*nptr = '\0';
 	nptr -= n;
-	res = ft_atoi(nptr);
+	res = atoi(nptr);
 	nptr += n;
 	*nptr = end;
 	return (res);

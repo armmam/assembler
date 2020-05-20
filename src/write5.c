@@ -1,18 +1,6 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   write5.c                                           :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: brika <brika@student.42.fr>                +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/05/10 17:37:10 by brika             #+#    #+#             */
-/*   Updated: 2020/05/10 17:52:29 by brika            ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
-#include "asm.h"
-#include "libft.h"
 #include <unistd.h>
+#include <stdio.h>
+#include "asm.h"
 
 void		disasm_check_eof(t_asm *a)
 {
@@ -37,7 +25,7 @@ static void	disasm_write_args(t_asm *a)
 	while (i < a->op.argnum)
 	{
 		if (i > 0)
-			ft_dprintf(a->fd, ", ");
+			dprintf(a->fd, ", ");
 		arg_code = typebyte >> (3 - i) * 2 & CODE_BITMASK;
 		if (arg_code == REG_CODE && a->op.args[i] & T_REG)
 			disasm_write_reg(a);
@@ -63,10 +51,10 @@ void		disasm_write_body(t_asm *a)
 		if (a->code[a->i] > 0 && a->code[a->i] <= INSTR_NUM)
 		{
 			a->op = g_tab[(int)a->code[a->i++]];
-			ft_dprintf(a->fd, "%s ", a->op.name);
+			dprintf(a->fd, "%s ", a->op.name);
 			disasm_check_eof(a);
 			disasm_write_args(a);
-			ft_dprintf(a->fd, "\n");
+			dprintf(a->fd, "\n");
 		}
 		else
 			error("Invalid instruction.");
@@ -79,7 +67,7 @@ void		disasm_write_body(t_asm *a)
 
 void		disasm_write_header(t_asm *a)
 {
-	ft_dprintf(a->fd, "%s \"%s\"\n%s \"%s\"\n",
+	dprintf(a->fd, "%s \"%s\"\n%s \"%s\"\n",
 	NAME_CMD_STRING, a->header.prog_name,
 	COMMENT_CMD_STRING, a->header.comment);
 }

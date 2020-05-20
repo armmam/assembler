@@ -1,19 +1,9 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   write1.c                                           :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: brika <brika@student.42.fr>                +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/05/10 17:36:23 by brika             #+#    #+#             */
-/*   Updated: 2020/05/10 18:07:23 by brika            ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
+#include <fcntl.h>
+#include <stdio.h>
+#include <unistd.h>
+#include <string.h>
 #include "asm.h"
 #include "libft.h"
-#include <fcntl.h>
-#include <unistd.h>
 
 /*
 ** Swap bytes in multibyte data so that it changes its endianness
@@ -69,7 +59,7 @@ static void	create_file(t_asm *a, int ac, char **av)
 	char	*new_filename;
 
 	filename = ac == 3 ? av[2] : av[1];
-	i = ft_strlen(filename);
+	i = strlen(filename);
 	while (--i >= 0 && filename[i] != '/')
 		if (filename[i] == '.')
 		{
@@ -77,12 +67,12 @@ static void	create_file(t_asm *a, int ac, char **av)
 			break ;
 		}
 	if (!(new_filename = ac == 3 ?
-	ft_strjoin(filename, ".s") : ft_strjoin(filename, ".cor")))
+	strjoin(filename, ".s") : strjoin(filename, ".cor")))
 		sys_error(NULL);
 	if ((a->fd = open(new_filename, O_WRONLY | O_CREAT | O_TRUNC, 0644)) < 0)
 		sys_error(new_filename);
-	ft_printf("Writing output program to %s\n", new_filename);
-	ft_memdel((void**)&new_filename);
+	printf("Writing output program to %s\n", new_filename);
+	memdel((void**)&new_filename);
 }
 
 /*

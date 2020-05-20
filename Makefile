@@ -17,24 +17,24 @@ all: $(NAME)
 -include $(OBJ:.o=.d)
 
 $(NAME): $(OBJ) $(LIBFT)
-	$(CC) $(FLAGS) -o $(NAME) $(OBJ) $(LIBFT)
+	@$(CC) $(FLAGS) -o $(NAME) $(OBJ) $(LIBFT)
 
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c | $(OBJ_DIR)
-	$(CC) $(FLAGS) -I$(HEAD_DIR) -I$(LIBFT_HEAD) -o $@ -c $<
+	@$(CC) $(FLAGS) -I$(HEAD_DIR) -I$(LIBFT_HEAD) -o $@ -c $<
 
 $(OBJ_DIR):
-	mkdir -p $(OBJ_DIR)
+	@mkdir -p $(OBJ_DIR)
 
 $(LIBFT): FAKE
-	make -C $(LIBFT_DIR)
+	@make -C $(LIBFT_DIR)
 
 clean:
-	rm -rf $(OBJ_DIR)
-	make clean -C $(LIBFT_DIR)
+	@rm -rf $(OBJ_DIR)
+	@make clean -C $(LIBFT_DIR)
 
 fclean: clean
-	rm -f $(NAME)
-	rm -f $(LIBFT)
+	@rm -f $(NAME)
+	@rm -f $(LIBFT)
 
 re: fclean all
 
